@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fe44d1ab9bea242ac1c844232d2173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 6
-  height: 6
+  width: 10
+  height: 10
   cellLabelPrefab: {fileID: 114207804599262258, guid: 9cf849b374232af41beaaae4446b697b,
     type: 2}
   cellPrefab: {fileID: 114630646841437634, guid: daa818ec910243148b50eb5a61514919,

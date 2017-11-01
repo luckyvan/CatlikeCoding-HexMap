@@ -4,9 +4,24 @@
 public struct HexCoordinates
 {
 
-    public int X { get; private set; }
+    [SerializeField]
+    private int x, z;
 
-    public int Z { get; private set; }
+    public int X
+    {
+        get
+        {
+            return x;
+        }
+    }
+
+    public int Z
+    {
+        get
+        {
+            return z;
+        }
+    }
 
     public int Y
     {
@@ -18,8 +33,8 @@ public struct HexCoordinates
 
     public HexCoordinates(int x, int z)
     {
-        X = x;
-        Z = z;
+        this.x = x;
+        this.z = z;
     }
 
     public static HexCoordinates FromOffsetCoordinates(int x, int z)
