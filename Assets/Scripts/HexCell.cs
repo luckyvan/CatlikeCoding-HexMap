@@ -9,7 +9,7 @@ public class HexCell : MonoBehaviour
     [SerializeField]
     HexCell[] neighbors;
 
-    public int elevation;
+    int elevation;
 
     public HexCell GetNeighbor(HexDirection direction)
     {
@@ -21,4 +21,20 @@ public class HexCell : MonoBehaviour
         neighbors[(int)direction] = cell;
         cell.neighbors[(int)direction.Opposite()] = this;
     }
+
+    public int Elevation
+    {
+        get
+        {
+            return elevation;
+        }
+        set
+        {
+            elevation = value;
+            Vector3 position = transform.localPosition;
+            position.y = value * HexMetrics.elevationStep;
+            transform.localPosition = position;
+        }
+    }
+
 }
