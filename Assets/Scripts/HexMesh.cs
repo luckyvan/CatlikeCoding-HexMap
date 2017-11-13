@@ -158,12 +158,30 @@ public class HexMesh : MonoBehaviour
         HexEdgeType leftEdgeType = bottomCell.GetEdgeType(leftCell);
         HexEdgeType rightEdgeType = bottomCell.GetEdgeType(rightCell);
 
+        // SSF, SFS and FSS
         if (leftEdgeType == HexEdgeType.Slope)
         {
             if (rightEdgeType == HexEdgeType.Slope)
             {
                 TriangulateCornerTerraces(
                     bottom, bottomCell, left, leftCell, right, rightCell
+                );
+                return;
+            }
+            if (rightEdgeType == HexEdgeType.Flat)
+            {
+                TriangulateCornerTerraces(
+                    left, leftCell, right, rightCell, bottom, bottomCell
+                );
+                return;
+            }
+        }
+        if (rightEdgeType == HexEdgeType.Slope)
+        {
+            if (leftEdgeType == HexEdgeType.Flat)
+            {
+                TriangulateCornerTerraces(
+                    right, rightCell, bottom, bottomCell, left, leftCell
                 );
                 return;
             }
