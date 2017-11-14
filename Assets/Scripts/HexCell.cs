@@ -13,6 +13,14 @@ public class HexCell : MonoBehaviour
 
     public RectTransform uiRect;
 
+    public Vector3 Position
+    {
+        get
+        {
+            return transform.localPosition;
+        }
+    }
+
     public HexCell GetNeighbor(HexDirection direction)
     {
         return neighbors[(int)direction];
