@@ -18,6 +18,8 @@ public static class HexMetrics
 
     public const int terraceSteps = terracesPerSlope * 2 + 1;
 
+    public const float cellPerturbStrength = 5f;
+
     public static Vector3[] corners = {
         new Vector3(0f, 0f, outerRadius),
         new Vector3(innerRadius, 0f, 0.5f * outerRadius),
