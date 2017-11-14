@@ -2,6 +2,7 @@
 
 public static class HexMetrics
 {
+    public static Texture2D noiseSource;
 
     public const float outerRadius = 10f;
 
@@ -85,5 +86,9 @@ public static class HexMetrics
             return HexEdgeType.Slope;
         }
         return HexEdgeType.Cliff;
+    }
+    public static Vector4 SampleNoise(Vector3 position)
+    {
+        return noiseSource.GetPixelBilinear(position.x, position.z);
     }
 }

@@ -21,8 +21,11 @@ public class HexGrid : MonoBehaviour
 
     HexMesh hexMesh;
 
+    public Texture2D noiseSource;
+
     void Awake()
     {
+        HexMetrics.noiseSource = noiseSource;
         gridCanvas = GetComponentInChildren<Canvas>();
         hexMesh = GetComponentInChildren<HexMesh>();
 
@@ -100,5 +103,9 @@ public class HexGrid : MonoBehaviour
     public void Refresh()
     {
         hexMesh.Triangulate(cells);
+    }
+    void OnEnable()
+    {
+        HexMetrics.noiseSource = noiseSource;
     }
 }
