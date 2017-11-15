@@ -80,6 +80,7 @@ public static class HexMetrics
         return Color.Lerp(a, b, h);
     }
 
+
     public static HexEdgeType GetEdgeType(int elevation1, int elevation2)
     {
         if (elevation1 == elevation2)
