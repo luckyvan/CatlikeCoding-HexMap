@@ -1288,6 +1288,8 @@ MonoBehaviour:
     type: 2}
   cellPrefab: {fileID: 114630646841437634, guid: daa818ec910243148b50eb5a61514919,
     type: 2}
+  chunkPrefab: {fileID: 114653194908754372, guid: 41f59c64118891d4b88912a588799b9d,
+    type: 2}
   noiseSource: {fileID: 2800000, guid: 38701cdeb1fb9427cbb585f917aa59cb, type: 3}
   chunkCountX: 4
   chunkCountZ: 3

@@ -18,11 +18,15 @@ public class HexGrid : MonoBehaviour
 
     public HexCell cellPrefab;
 
+    public HexGridChunk chunkPrefab;
+
     HexMesh hexMesh;
 
     public Texture2D noiseSource;
 
     public int chunkCountX = 4, chunkCountZ = 3;
+
+    HexGridChunk[] chunks;
 
     void Awake()
     {
@@ -33,6 +37,7 @@ public class HexGrid : MonoBehaviour
         cellCountX = chunkCountX * HexMetrics.chunkSizeX;
         cellCountZ = chunkCountZ * HexMetrics.chunkSizeZ;
 
+        CreateChunks();
         CreateCells();
     }
 
@@ -45,6 +50,20 @@ public class HexGrid : MonoBehaviour
             for (int x = 0; x < cellCountX; x++)
             {
                 CreateCell(x, z, i++);
+            }
+        }
+    }
+
+    void CreateChunks()
+    {
+        chunks = new HexGridChunk[chunkCountX * chunkCountZ];
+
+        for (int z = 0, i = 0; z < chunkCountZ; z++)
+        {
+            for (int x = 0; x < chunkCountX; x++)
+            {
+                HexGridChunk chunk = chunks[i++] = Instantiate(chunkPrefab);
+                chunk.transform.SetParent(transform);
             }
         }
     }
