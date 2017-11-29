@@ -855,6 +855,7 @@ MonoBehaviour:
   moveSpeedMinZoom: 400
   moveSpeedMaxZoom: 100
   grid: {fileID: 1185849611}
+  rotationSpeed: 180
 --- !u!1 &817686055
 GameObject:
   m_ObjectHideFlags: 0
