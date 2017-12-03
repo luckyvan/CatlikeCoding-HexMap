@@ -106,4 +106,16 @@ public class HexMapEditor : MonoBehaviour
     {
         hexGrid.ShowUI(visible);
     }
+
+    enum OptionalToggle
+    {
+        Ignore, Yes, No
+    }
+
+    OptionalToggle riverMode;
+
+    public void SetRiverMode(int mode)
+    {
+        riverMode = (OptionalToggle)mode;
+    }
 }
