@@ -32,6 +32,64 @@ public class HexCell : MonoBehaviour
 
     public HexGridChunk chunk;
 
+    bool hasIncomingRiver, hasOutgoingRiver;
+    HexDirection incomingRiver, outgoingRiver;
+
+    public bool HasIncomingRiver
+    {
+        get
+        {
+            return hasIncomingRiver;
+        }
+    }
+
+    public bool HasOutgoingRiver
+    {
+        get
+        {
+            return hasOutgoingRiver;
+        }
+    }
+
+    public HexDirection IncomingRiver
+    {
+        get
+        {
+            return incomingRiver;
+        }
+    }
+
+    public HexDirection OutgoingRiver
+    {
+        get
+        {
+            return outgoingRiver;
+        }
+    }
+
+    public bool HasRiver
+    {
+        get
+        {
+            return hasIncomingRiver || hasOutgoingRiver;
+        }
+    }
+
+    public bool HasRiverBeginOrEnd
+    {
+        get
+        {
+            return hasIncomingRiver != hasOutgoingRiver;
+        }
+    }
+
+    public bool HasRiverThroughEdge(HexDirection direction)
+    {
+        return
+            hasIncomingRiver && incomingRiver == direction ||
+            hasOutgoingRiver && outgoingRiver == direction;
+    }
+
     public Vector3 Position
     {
         get
@@ -91,6 +149,7 @@ public class HexCell : MonoBehaviour
             elevation, otherCell.elevation
         );
     }
+
     void Refresh()
     {
         if (chunk)
