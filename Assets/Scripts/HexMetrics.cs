@@ -18,7 +18,7 @@ public static class HexMetrics
 
     public const int terraceSteps = terracesPerSlope * 2 + 1;
 
-    public const float cellPerturbStrength = 4f;
+    public const float cellPerturbStrength = 0f;//4f;
 
     public const float noiseScale = 0.003f;
 
