@@ -221,6 +221,16 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public float StreamBedY
+    {
+        get
+        {
+            return
+                (elevation + HexMetrics.streamBedElevationOffset) *
+                HexMetrics.elevationStep;
+        }
+    }
+
     public HexEdgeType GetEdgeType(HexDirection direction)
     {
         return HexMetrics.GetEdgeType(
