@@ -57,17 +57,30 @@ public class HexMesh : MonoBehaviour
             center + HexMetrics.GetSecondSolidCorner(direction)
         );
 
-        if (cell.HasRiverThroughEdge(direction))
+        if (cell.HasRiver)
         {
-            e.v3.y = cell.StreamBedY;
+            if (cell.HasRiverThroughEdge(direction))
+            {
+                e.v3.y = cell.StreamBedY;
+                TriangulateWithRiver(direction, cell, center, e);
+            }
         }
-
-        TriangulateEdgeFan(center, e, cell.Color);
+        else
+        {
+            TriangulateEdgeFan(center, e, cell.Color);
+        }
 
         if (direction <= HexDirection.SE)
         {
             TriangulateConnection(direction, cell, e);
         }
+    }
+
+    void TriangulateWithRiver(
+         HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
+     )
+    {
+
     }
 
     void TriangulateConnection(
