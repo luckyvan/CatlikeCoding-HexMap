@@ -41,7 +41,10 @@
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;
-    		o.Albedo.rg = IN.uv_MainTex;
+    		if (IN.uv_MainTex.y < 0) {
+				IN.uv_MainTex.y += 1;
+			}
+			o.Albedo.rg = IN.uv_MainTex;
 		}
 		ENDCG
 	}
