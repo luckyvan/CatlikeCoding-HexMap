@@ -842,6 +842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75793faf44d6ce408a83c17b89096db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollider: 0
+  useColors: 0
+  useUVCoordinates: 0
 --- !u!4 &341346800
 Transform:
   m_ObjectHideFlags: 0
