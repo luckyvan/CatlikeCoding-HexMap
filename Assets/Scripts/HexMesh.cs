@@ -71,6 +71,11 @@ public class HexMesh : MonoBehaviour
                     TriangulateWithRiver(direction, cell, center, e);
                 }
             }
+            else
+            {
+                TriangulateAdjacentToRiver(direction, cell, center, e);
+            }
+
         }
         else
         {
@@ -81,6 +86,19 @@ public class HexMesh : MonoBehaviour
         {
             TriangulateConnection(direction, cell, e);
         }
+    }
+
+    void TriangulateAdjacentToRiver(
+        HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
+    )
+    {
+        EdgeVertices m = new EdgeVertices(
+            Vector3.Lerp(center, e.v1, 0.5f),
+            Vector3.Lerp(center, e.v5, 0.5f)
+        );
+
+        TriangulateEdgeStrip(m, cell.Color, e, cell.Color);
+        TriangulateEdgeFan(center, m, cell.Color);
     }
 
     void TriangulateWithRiver(
