@@ -140,6 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75793faf44d6ce408a83c17b89096db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCollider: 1
+  useColors: 1
+  useUVCoordinates: 0
 --- !u!114 &114596093484569192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73056b2a584d1ec49b2799c23c701f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrain: {fileID: 114262918068888238}
 --- !u!223 &223123421073621654
 Canvas:
   m_ObjectHideFlags: 1
