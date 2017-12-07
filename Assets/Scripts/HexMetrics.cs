@@ -21,7 +21,7 @@ public static class HexMetrics
 
     public const int terraceSteps = terracesPerSlope * 2 + 1;
 
-    public const float cellPerturbStrength = 0f;//4f;
+    public const float cellPerturbStrength = 4f;
 
     public const float noiseScale = 0.003f;
 
@@ -41,7 +41,7 @@ public static class HexMetrics
         new Vector3(0f, 0f, outerRadius),
     };
 
-    public const float streamBedElevationOffset = -1f;
+    public const float streamBedElevationOffset = -1.75f;
 
     public static Vector3 GetFirstCorner(HexDirection direction)
     {
