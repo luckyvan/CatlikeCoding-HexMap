@@ -264,7 +264,7 @@ public class HexGridChunk : MonoBehaviour
             e2.v3.y = neighbor.StreamBedY;
             TriangulateRiverQuad(
                 e1.v2, e1.v4, e2.v2, e2.v4,
-                cell.RiverSurfaceY, 0.8f,
+                cell.RiverSurfaceY, neighbor.RiverSurfaceY, 0.8f,
                 cell.HasIncomingRiver && cell.IncomingRiver == direction
             );
         }
