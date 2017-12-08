@@ -203,12 +203,12 @@ public class HexCell : MonoBehaviour
 
         hasOutgoingRiver = true;
         outgoingRiver = direction;
-        RefreshSelfOnly();
 
         neighbor.RemoveIncomingRiver();
         neighbor.hasIncomingRiver = true;
         neighbor.incomingRiver = direction.Opposite();
-        neighbor.RefreshSelfOnly();
+
+        SetRoad((int)direction, false);
     }
 
     private void RefreshSelfOnly()
@@ -272,6 +272,14 @@ public class HexCell : MonoBehaviour
             )
             {
                 RemoveIncomingRiver();
+            }
+
+            for (int i = 0; i < roads.Length; i++)
+            {
+                if (roads[i] && GetElevationDifference((HexDirection)i) > 1)
+                {
+                    SetRoad(i, false);
+                }
             }
 
             Refresh();
