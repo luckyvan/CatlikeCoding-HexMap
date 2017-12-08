@@ -47,18 +47,38 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public void AddRoad(HexDirection direction)
+    {
+        if (!roads[(int)direction] && !HasRiverThroughEdge(direction) &&
+            GetElevationDifference(direction) <= 1)
+        {
+            SetRoad((int)direction, true);
+        }
+    }
+
     public void RemoveRoads()
     {
         for (int i = 0; i < neighbors.Length; i++)
         {
             if (roads[i])
             {
-                roads[i] = false;
-                neighbors[i].roads[(int)((HexDirection)i).Opposite()] = false;
-                neighbors[i].RefreshSelfOnly();
-                RefreshSelfOnly();
+                SetRoad(i, false);
             }
         }
+    }
+
+    void SetRoad(int index, bool state)
+    {
+        roads[index] = state;
+        neighbors[index].roads[(int)((HexDirection)index).Opposite()] = state;
+        neighbors[index].RefreshSelfOnly();
+        RefreshSelfOnly();
+    }
+
+    public int GetElevationDifference(HexDirection direction)
+    {
+        int difference = elevation - GetNeighbor(direction).elevation;
+        return difference >= 0 ? difference : -difference;
     }
 
     [SerializeField]
