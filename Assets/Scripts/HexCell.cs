@@ -47,6 +47,20 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public void RemoveRoads()
+    {
+        for (int i = 0; i < neighbors.Length; i++)
+        {
+            if (roads[i])
+            {
+                roads[i] = false;
+                neighbors[i].roads[(int)((HexDirection)i).Opposite()] = false;
+                neighbors[i].RefreshSelfOnly();
+                RefreshSelfOnly();
+            }
+        }
+    }
+
     [SerializeField]
     HexCell[] neighbors;
 
