@@ -25,6 +25,29 @@ public class HexCell : MonoBehaviour
     Color color;
 
     [SerializeField]
+    bool[] roads;
+
+    public bool HasRoadThroughEdge(HexDirection direction)
+    {
+        return roads[(int)direction];
+    }
+
+    public bool HasRoads
+    {
+        get
+        {
+            for (int i = 0; i < roads.Length; i++)
+            {
+                if (roads[i])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    [SerializeField]
     HexCell[] neighbors;
 
     int elevation = int.MinValue;
