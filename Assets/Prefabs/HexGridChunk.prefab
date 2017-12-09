@@ -333,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 114956669191856132}
   rivers: {fileID: 114151425040246606}
-  roads: {fileID: 0}
+  roads: {fileID: 114262918068888238}
 --- !u!114 &114956669191856132
 MonoBehaviour:
   m_ObjectHideFlags: 1
