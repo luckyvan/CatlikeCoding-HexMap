@@ -372,6 +372,31 @@ public class HexGridChunk : MonoBehaviour
             roadCenter += offset * 0.7f;
             center += offset * 0.5f;
         }
+        else
+        {
+            HexDirection middle;
+            if (previousHasRiver)
+            {
+                middle = direction.Next();
+            }
+            else if (nextHasRiver)
+            {
+                middle = direction.Previous();
+            }
+            else
+            {
+                middle = direction;
+            }
+            if (
+                !cell.HasRoadThroughEdge(middle) &&
+                !cell.HasRoadThroughEdge(middle.Previous()) &&
+                !cell.HasRoadThroughEdge(middle.Next())
+            )
+            {
+                return;
+            }
+            roadCenter += HexMetrics.GetSolidEdgeMiddle(middle) * 0.25f;
+        }
 
         Vector3 mL = Vector3.Lerp(roadCenter, e.v1, interpolators.x);
         Vector3 mR = Vector3.Lerp(roadCenter, e.v5, interpolators.y);
