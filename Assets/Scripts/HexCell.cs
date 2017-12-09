@@ -216,6 +216,14 @@ public class HexCell : MonoBehaviour
         chunk.Refresh();
     }
 
+    public HexDirection RiverBeginOrEndDirection
+    {
+        get
+        {
+            return hasIncomingRiver ? incomingRiver : outgoingRiver;
+        }
+    }
+
     public Vector3 Position
     {
         get
