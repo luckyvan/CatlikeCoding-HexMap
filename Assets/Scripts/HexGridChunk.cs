@@ -133,6 +133,11 @@ public class HexGridChunk : MonoBehaviour
         HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
     )
     {
+        if (cell.HasRoads)
+        {
+            TriangulateRoadAdjacentToRiver(direction, cell, center, e);
+        }
+
         if (cell.HasRiverThroughEdge(direction.Next()))
         {
             if (cell.HasRiverThroughEdge(direction.Previous()))
@@ -302,6 +307,18 @@ public class HexGridChunk : MonoBehaviour
         roads.AddTriangleUV(
             new Vector2(1f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f)
         );
+    }
+
+    void TriangulateRoadAdjacentToRiver(
+        HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
+    )
+    {
+        bool hasRoadThroughEdge = cell.HasRoadThroughEdge(direction);
+        Vector2 interpolators = GetRoadInterpolators(direction, cell);
+        Vector3 roadCenter = center;
+        Vector3 mL = Vector3.Lerp(roadCenter, e.v1, interpolators.x);
+        Vector3 mR = Vector3.Lerp(roadCenter, e.v5, interpolators.y);
+        TriangulateRoad(roadCenter, mL, mR, e, hasRoadThroughEdge);
     }
 
     void TriangulateConnection(
