@@ -119,10 +119,11 @@ public class HexGridChunk : MonoBehaviour
 
         if (cell.HasRoads)
         {
+            Vector2 interpolators = GetRoadInterpolators(direction, cell);
             TriangulateRoad(
                 center,
-                Vector3.Lerp(center, e.v1, 0.5f),
-                Vector3.Lerp(center, e.v5, 0.5f),
+                Vector3.Lerp(center, e.v1, interpolators.x),
+                Vector3.Lerp(center, e.v5, interpolators.y),
                 e, cell.HasRoadThroughEdge(direction)
             );
         }
@@ -648,5 +649,22 @@ public class HexGridChunk : MonoBehaviour
         {
             rivers.AddQuadUV(0f, 1f, v, v + 0.2f);
         }
+    }
+
+    Vector2 GetRoadInterpolators(HexDirection direction, HexCell cell)
+    {
+        Vector2 interpolators;
+        if (cell.HasRoadThroughEdge(direction))
+        {
+            interpolators.x = interpolators.y = 0.5f;
+        }
+        else
+        {
+            interpolators.x =
+                cell.HasRoadThroughEdge(direction.Previous()) ? 0.5f : 0.25f;
+            interpolators.y =
+                cell.HasRoadThroughEdge(direction.Next()) ? 0.5f : 0.25f;
+        }
+        return interpolators;
     }
 }
