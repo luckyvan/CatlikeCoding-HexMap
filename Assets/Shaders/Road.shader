@@ -24,6 +24,7 @@
 
 		struct Input {
 			float2 uv_MainTex;
+     		float3 worldPos;
 		};
 
 		half _Glossiness;
@@ -38,9 +39,11 @@
 		UNITY_INSTANCING_CBUFFER_END
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
-			fixed4 c = _Color;
 			float blend = IN.uv_MainTex.x;
+			float4 noise = tex2D(_MainTex, IN.worldPos.xz * 0.025);
+			blend *= noise.x + 0.5;
 			blend = smoothstep(0.4, 0.7, blend);
+			fixed4 c = _Color * (noise.y * 0.75 + 0.25);
 
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
