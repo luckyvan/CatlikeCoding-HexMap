@@ -299,7 +299,17 @@ public class HexCell : MonoBehaviour
         get
         {
             return
-                (elevation + HexMetrics.riverSurfaceElevationOffset) *
+                (elevation + HexMetrics.waterElevationOffset) *
+                HexMetrics.elevationStep;
+        }
+    }
+
+    public float WaterSurfaceY
+    {
+        get
+        {
+            return
+                (waterLevel + HexMetrics.waterElevationOffset) *
                 HexMetrics.elevationStep;
         }
     }
@@ -331,7 +341,17 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    int waterLevel; public HexEdgeType GetEdgeType(HexDirection direction)
+    int waterLevel;
+
+    public bool IsUnderwater
+    {
+        get
+        {
+            return waterLevel > elevation;
+        }
+    }
+
+    public HexEdgeType GetEdgeType(HexDirection direction)
     {
         return HexMetrics.GetEdgeType(
             elevation, neighbors[(int)direction].elevation
