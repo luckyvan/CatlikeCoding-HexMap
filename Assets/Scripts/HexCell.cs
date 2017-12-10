@@ -314,7 +314,24 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public HexEdgeType GetEdgeType(HexDirection direction)
+    public int WaterLevel
+    {
+        get
+        {
+            return waterLevel;
+        }
+        set
+        {
+            if (waterLevel == value)
+            {
+                return;
+            }
+            waterLevel = value;
+            Refresh();
+        }
+    }
+
+    int waterLevel; public HexEdgeType GetEdgeType(HexDirection direction)
     {
         return HexMetrics.GetEdgeType(
             elevation, neighbors[(int)direction].elevation
