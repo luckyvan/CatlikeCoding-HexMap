@@ -111,6 +111,22 @@ public class HexGridChunk : MonoBehaviour
         {
             TriangulateConnection(direction, cell, e);
         }
+        
+        if (cell.IsUnderwater)
+        {
+            TriangulateWater(direction, cell, center);
+        }
+    }
+
+    void TriangulateWater(
+        HexDirection direction, HexCell cell, Vector3 center
+    )
+    {
+        center.y = cell.WaterSurfaceY;
+        Vector3 c1 = center + HexMetrics.GetFirstSolidCorner(direction);
+        Vector3 c2 = center + HexMetrics.GetSecondSolidCorner(direction);
+
+        water.AddTriangle(center, c1, c2);
     }
 
     private void TrangulateWithoutRiver(
