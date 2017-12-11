@@ -35,7 +35,24 @@
 		UNITY_INSTANCING_CBUFFER_END
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
-			fixed4 c = fixed4(IN.uv_MainTex, 1, 1);
+			float shore = IN.uv_MainTex.y;
+			shore = sqrt(shore);
+
+			float2 noiseUV = IN.worldPos.xz;
+			float4 noise = tex2D(_MainTex, noiseUV * 0.015);
+
+		    float distortion1 = noise.x * (1 - shore);
+			float foam1 = sin((shore + distortion1) * 10 - _Time.y);
+			foam1 *= foam1;
+
+			float distortion2 = noise.y * (1 - shore);
+			float foam2 = sin((shore + distortion2) * 10 + _Time.y + 2);
+			foam2 *= foam2 * 0.7;
+
+			float foam = max(foam1, foam2) * shore;
+			foam *= foam * shore;
+
+			fixed4 c = saturate(_Color + foam);
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
