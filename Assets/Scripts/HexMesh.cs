@@ -10,10 +10,10 @@ public class HexMesh : MonoBehaviour
     [NonSerialized] List<Vector3> vertices;
     [NonSerialized] List<Color> colors;
     [NonSerialized] List<int> triangles;
-    [NonSerialized] List<Vector2> uvs;
+    [NonSerialized] List<Vector2> uvs, uv2s;
 
     MeshCollider meshCollider;
-    public bool useCollider, useColors, useUVCoordinates;
+    public bool useCollider, useColors, useUVCoordinates, useUV2Coordinates;
 
     void Awake()
     {
@@ -125,6 +125,29 @@ public class HexMesh : MonoBehaviour
         uvs.Add(new Vector2(uMax, vMax));
     }
 
+    public void AddTriangleUV2(Vector2 uv1, Vector2 uv2, Vector3 uv3)
+    {
+        uv2s.Add(uv1);
+        uv2s.Add(uv2);
+        uv2s.Add(uv3);
+    }
+
+    public void AddQuadUV2(Vector2 uv1, Vector2 uv2, Vector3 uv3, Vector3 uv4)
+    {
+        uv2s.Add(uv1);
+        uv2s.Add(uv2);
+        uv2s.Add(uv3);
+        uv2s.Add(uv4);
+    }
+
+    public void AddQuadUV2(float uMin, float uMax, float vMin, float vMax)
+    {
+        uv2s.Add(new Vector2(uMin, vMin));
+        uv2s.Add(new Vector2(uMax, vMin));
+        uv2s.Add(new Vector2(uMin, vMax));
+        uv2s.Add(new Vector2(uMax, vMax));
+    }
+
     public void Clear()
     {
         hexMesh.Clear();
@@ -136,6 +159,10 @@ public class HexMesh : MonoBehaviour
         if (useUVCoordinates)
         {
             uvs = ListPool<Vector2>.Get();
+        }
+        if (useUV2Coordinates)
+        {
+            uv2s = ListPool<Vector2>.Get();
         }
         triangles = ListPool<int>.Get();
     }
@@ -161,6 +188,11 @@ public class HexMesh : MonoBehaviour
         {
             hexMesh.SetUVs(0, uvs);
             ListPool<Vector2>.Add(uvs);
+        }
+        if (useUV2Coordinates)
+        {
+            hexMesh.SetUVs(0, uv2s);
+            ListPool<Vector2>.Add(uv2s);
         }
     }
 
