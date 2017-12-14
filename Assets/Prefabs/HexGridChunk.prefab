@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 64284463530953228}
   - component: {fileID: 64839023524767002}
   - component: {fileID: 64744079359571464}
+  - component: {fileID: 64519245218480358}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -488,6 +489,20 @@ MeshFilter:
   m_GameObject: {fileID: 1016512409019136}
   m_Mesh: {fileID: 0}
 --- !u!64 &64284463530953228
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840761618332792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &64519245218480358
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
