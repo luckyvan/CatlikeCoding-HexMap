@@ -115,7 +115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1750376397513958
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 23777146257693934}
   - component: {fileID: 64284463530953228}
   - component: {fileID: 64839023524767002}
+  - component: {fileID: 64744079359571464}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -425,7 +426,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 128a140b4b66f5a4f9fad13340011424, type: 2}
+  - {fileID: 2100000, guid: a6d72fa18489a5742a2cb5100adb653b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -487,6 +488,20 @@ MeshFilter:
   m_GameObject: {fileID: 1016512409019136}
   m_Mesh: {fileID: 0}
 --- !u!64 &64284463530953228
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840761618332792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!64 &64744079359571464
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
