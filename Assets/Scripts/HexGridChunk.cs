@@ -234,10 +234,25 @@ public class HexGridChunk : MonoBehaviour
         estuaries.AddTriangleUV(
             new Vector2(0f, 0f), new Vector2(0f, 1f), new Vector2(0f, 1f)
         );
+
         estuaries.AddQuad(e2.v1, e1.v2, e2.v2, e1.v3);
         estuaries.AddQuad(e1.v3, e1.v4, e2.v4, e2.v5);
         estuaries.AddQuadUV(0f, 0f, 0f, 1f);
         estuaries.AddQuadUV(0f, 0f, 0f, 1f);
+
+        estuaries.AddTriangleUV2(
+            new Vector2(0.5f, 1.1f),
+            new Vector2(1f, 0.8f),
+            new Vector2(0f, 0.8f)
+        );
+        estuaries.AddQuadUV2(
+            new Vector2(1f, 0.8f), new Vector2(1f, 1.1f),
+            new Vector2(1f, 0.8f), new Vector2(0.5f, 1.1f)
+        );
+        estuaries.AddQuadUV2(
+            new Vector2(0.5f, 1.1f), new Vector2(0f, 1.1f),
+            new Vector2(0f, 0.8f), new Vector2(0f, 0.8f)
+        );
     }
 
     private void TrangulateWithoutRiver(

@@ -1181,6 +1181,7 @@ MonoBehaviour:
   useCollider: 0
   useColors: 0
   useUVCoordinates: 0
+  useUV2Coordinates: 0
 --- !u!4 &341346800
 Transform:
   m_ObjectHideFlags: 0

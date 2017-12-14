@@ -22,6 +22,7 @@
 
 		struct Input {
 			float2 uv_MainTex;
+			float2 uv2_MainTex;
 			float3 worldPos;
 		};
 
@@ -42,8 +43,9 @@
 			float foam = Foam(shore, IN.worldPos.xz, _MainTex);
 			float waves = Waves(IN.worldPos.xz, _MainTex);
 			waves *= 1 - shore;
+			float river = River(IN.uv2_MainTex, _MainTex);
 
-			fixed4 c = saturate(_Color + max(foam, waves));
+			fixed4 c = saturate(_Color + river);
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
