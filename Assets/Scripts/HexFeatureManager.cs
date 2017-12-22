@@ -4,7 +4,17 @@ public class HexFeatureManager : MonoBehaviour
 {
     public Transform featurePrefab;
 
-    public void Clear() { }
+    Transform container;
+
+    public void Clear() {
+        if (container)
+        {
+            Destroy(container.gameObject);
+        }
+
+        container = new GameObject("Feature Container").transform;
+        container.SetParent(transform, false);
+    }
 
     public void Apply() { }
 
@@ -13,5 +23,6 @@ public class HexFeatureManager : MonoBehaviour
         Transform instance = Instantiate(featurePrefab);
         position.y += instance.localScale.y * 0.5f;
         instance.localPosition = HexMetrics.Perturb(position);
+        instance.SetParent(container);
     }
 }
