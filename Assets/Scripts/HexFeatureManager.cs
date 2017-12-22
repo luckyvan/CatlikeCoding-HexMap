@@ -2,6 +2,7 @@
 
 public class HexFeatureManager : MonoBehaviour
 {
+    public Transform featurePrefab;
 
     public void Clear() { }
 
