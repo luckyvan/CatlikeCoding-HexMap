@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33050399119508854}
   - component: {fileID: 23267100980927224}
   m_Layer: 0
-  m_Name: Urban 1
+  m_Name: Urban Low 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

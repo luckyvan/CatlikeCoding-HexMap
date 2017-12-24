@@ -630,10 +630,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b0a1e5b464ba84ba506eb68dc6a824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  urbanPrefabs:
-  - {fileID: 4326589369700288, guid: 2efdf9c0d2a223f46b20aeb96216e7f5, type: 2}
-  - {fileID: 4326589369700288, guid: da38c02c4b20e6d47844d40e68cda8e2, type: 2}
-  - {fileID: 4326589369700288, guid: 1b50f07a5fefdca4b8dc7377306f11fc, type: 2}
+  urbanCollections:
+  - prefabs:
+    - {fileID: 4326589369700288, guid: 2efdf9c0d2a223f46b20aeb96216e7f5, type: 2}
+    - {fileID: 4326589369700288, guid: 289f437dc57c2ab478d67a0d23caf888, type: 2}
+  - prefabs:
+    - {fileID: 4326589369700288, guid: da38c02c4b20e6d47844d40e68cda8e2, type: 2}
+    - {fileID: 4326589369700288, guid: 08ecf74a98bc7cd4480002ac8048e7bd, type: 2}
+  - prefabs:
+    - {fileID: 4326589369700288, guid: 1b50f07a5fefdca4b8dc7377306f11fc, type: 2}
+    - {fileID: 4326589369700288, guid: 0d304d621f3edb54b9f95118c61ca6df, type: 2}
 --- !u!114 &114356651231974316
 MonoBehaviour:
   m_ObjectHideFlags: 1
