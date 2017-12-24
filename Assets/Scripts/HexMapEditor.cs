@@ -20,6 +20,10 @@ public class HexMapEditor : MonoBehaviour
 
     bool applyWaterLevel = true;
 
+    int activeUrbanLevel;
+
+    bool applyUrbanLevel;
+
     enum OptionalToggle
     {
         Ignore, Yes, No
@@ -127,6 +131,10 @@ public class HexMapEditor : MonoBehaviour
             {
                 cell.RemoveRoads();
             }
+            if (applyUrbanLevel)
+            {
+                cell.UrbanLevel = activeUrbanLevel;
+            }
             if (isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
@@ -203,5 +211,15 @@ public class HexMapEditor : MonoBehaviour
             }
         }
         isDrag = false;
+    }
+
+    public void SetApplyUrbanLevel(bool toggle)
+    {
+        applyUrbanLevel = toggle;
+    }
+
+    public void SetUrbanLevel(float level)
+    {
+        activeUrbanLevel = (int)level;
     }
 }
