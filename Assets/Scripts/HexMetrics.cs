@@ -51,7 +51,7 @@ public static class HexMetrics
 
     public const float hashGridScale = 0.25f;
 
-    static float[] hashGrid;
+    static HexHash[] hashGrid;
 
     public static Vector3 GetFirstCorner(HexDirection direction)
     {
@@ -121,7 +121,7 @@ public static class HexMetrics
             );
     }
 
-    public static float SampleHashGrid(Vector3 position)
+    public static HexHash SampleHashGrid(Vector3 position)
     {
         int x = (int)(position.x * hashGridScale) % hashGridSize;
         if (x < 0)
@@ -168,12 +168,12 @@ public static class HexMetrics
 
     public static void InitializeHashGrid(int seed)
     {
-        hashGrid = new float[hashGridSize * hashGridSize];
+        hashGrid = new HexHash[hashGridSize * hashGridSize];
         Random.State state = Random.state;
         Random.InitState(seed);
         for (int i = 0; i < hashGrid.Length; i++)
         {
-            hashGrid[i] = Random.value;
+            hashGrid[i] = HexHash.Create();
         }
         Random.state = state;
     }
