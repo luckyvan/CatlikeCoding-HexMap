@@ -47,6 +47,10 @@ public static class HexMetrics
 
     public const float streamBedElevationOffset = -1.75f;
 
+    public const int hashGridSize = 256;
+
+    static float[] hashGrid;
+
     public static Vector3 GetFirstCorner(HexDirection direction)
     {
         return corners[(int)direction];
@@ -143,5 +147,17 @@ public static class HexMetrics
     {
         return (corners[(int)direction] + corners[(int)direction + 1]) *
             waterBlendFactor;
+    }
+
+    public static void InitializeHashGrid(int seed)
+    {
+        hashGrid = new float[hashGridSize * hashGridSize];
+        Random.State state = Random.state;
+        Random.InitState(seed);
+        for (int i = 0; i < hashGrid.Length; i++)
+        {
+            hashGrid[i] = Random.value;
+        }
+        Random.state = state;
     }
 }
