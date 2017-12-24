@@ -49,6 +49,8 @@ public static class HexMetrics
 
     public const int hashGridSize = 256;
 
+    public const float hashGridScale = 0.25f;
+
     static float[] hashGrid;
 
     public static Vector3 GetFirstCorner(HexDirection direction)
@@ -117,6 +119,21 @@ public static class HexMetrics
             position.x * noiseScale, 
             position.z * noiseScale
             );
+    }
+
+    public static float SampleHashGrid(Vector3 position)
+    {
+        int x = (int)(position.x * hashGridScale) % hashGridSize;
+        if (x < 0)
+        {
+            x += hashGridSize;
+        }
+        int z = (int)(position.z * hashGridSize) % hashGridSize;
+        if (z < 0)
+        {
+            z += hashGridSize;
+        }
+        return hashGrid[x + z * hashGridSize];
     }
 
     public static Vector3 GetSolidEdgeMiddle(HexDirection direction)
