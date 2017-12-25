@@ -20,9 +20,9 @@ public class HexMapEditor : MonoBehaviour
 
     bool applyWaterLevel = true;
 
-    int activeUrbanLevel;
+    int activeUrbanLevel, activeFarmLevel, activePlantLevel;
 
-    bool applyUrbanLevel;
+    bool applyUrbanLevel, applyFarmLevel, applyPlantLevel;
 
     enum OptionalToggle
     {
@@ -135,6 +135,14 @@ public class HexMapEditor : MonoBehaviour
             {
                 cell.UrbanLevel = activeUrbanLevel;
             }
+            if (applyFarmLevel)
+            {
+                cell.FarmLevel = activeFarmLevel;
+            }
+            if (applyPlantLevel)
+            {
+                cell.PlantLevel = activePlantLevel;
+            }
             if (isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
@@ -221,5 +229,25 @@ public class HexMapEditor : MonoBehaviour
     public void SetUrbanLevel(float level)
     {
         activeUrbanLevel = (int)level;
+    }
+
+    public void SetApplyFarmLevel(bool toggle)
+    {
+        applyFarmLevel = toggle;
+    }
+
+    public void SetFarmLevel(float level)
+    {
+        activeFarmLevel = (int)level;
+    }
+
+    public void SetApplyPlantLevel(bool toggle)
+    {
+        applyPlantLevel = toggle;
+    }
+
+    public void SetPlantLevel(float level)
+    {
+        activePlantLevel = (int)level;
     }
 }
