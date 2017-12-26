@@ -6,6 +6,8 @@ public class HexFeatureManager : MonoBehaviour
 
     Transform container;
 
+    public HexMesh walls;
+
     public void Clear() {
         if (container)
         {
@@ -14,9 +16,12 @@ public class HexFeatureManager : MonoBehaviour
 
         container = new GameObject("Feature Container").transform;
         container.SetParent(transform, false);
+        walls.Clear();
     }
 
-    public void Apply() { }
+    public void Apply() {
+        walls.Apply();
+    }
 
     public void AddFeature(HexCell cell, Vector3 position)
     {
@@ -81,5 +86,11 @@ public class HexFeatureManager : MonoBehaviour
             }
         }
         return null;
+    }
+    public void AddWall(
+        EdgeVertices near, HexCell nearCell,
+        EdgeVertices far, HexCell farCell
+    )
+    {
     }
 }
