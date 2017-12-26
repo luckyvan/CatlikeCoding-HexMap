@@ -92,5 +92,24 @@ public class HexFeatureManager : MonoBehaviour
         EdgeVertices far, HexCell farCell
     )
     {
+        if (nearCell.Walled != farCell.Walled)
+        {
+            AddWallSegment(near.v1, far.v1, near.v5, far.v5);
+        }
+    }
+
+    void AddWallSegment(
+        Vector3 nearLeft, Vector3 farLeft, Vector3 nearRight, Vector3 farRight
+    )
+    {
+        Vector3 left = Vector3.Lerp(nearLeft, farLeft, 0.5f);
+        Vector3 right = Vector3.Lerp(nearRight, farRight, 0.5f);
+
+        Vector3 v1, v2, v3, v4;
+        v1 = v3 = left;
+        v2 = v4 = right;
+        v3.y = v4.y = left.y + HexMetrics.wallHeight;
+        walls.AddQuad(v1, v2, v3, v4);
+        walls.AddQuad(v2, v1, v4, v3);
     }
 }

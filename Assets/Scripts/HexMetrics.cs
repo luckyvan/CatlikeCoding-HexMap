@@ -188,4 +188,6 @@ public static class HexMetrics
     {
         return featureThresholds[level];
     }
+
+    public const float wallHeight = 3f;
 }
