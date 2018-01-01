@@ -190,6 +190,10 @@ public class HexFeatureManager : MonoBehaviour
             {
                 AddWallSegment(pivot, left, pivot, right);
             }
+            else if (leftCell.Elevation < rightCell.Elevation)
+            {
+                AddWallWedge(pivot, left, right);
+            }
             else
             {
                 AddWallCap(pivot, left);
@@ -197,7 +201,14 @@ public class HexFeatureManager : MonoBehaviour
         }
         else if (hasRighWall)
         {
-            AddWallCap(right, pivot);
+            if (rightCell.Elevation < leftCell.Elevation)
+            {
+                AddWallWedge(right, pivot, left);
+            }
+            else
+            {
+                AddWallCap(right, pivot);
+            }
         }
     }
 
@@ -241,4 +252,28 @@ public class HexFeatureManager : MonoBehaviour
             AddWallSegment(c3, cell3, c1, cell1, c2, cell2);
         }
     }
+
+    void AddWallWedge(Vector3 near, Vector3 far, Vector3 point)
+    {
+        near = HexMetrics.Perturb(near);
+        far = HexMetrics.Perturb(far);
+        point = HexMetrics.Perturb(point);
+
+        Vector3 center = HexMetrics.WallLerp(near, far);
+        Vector3 thickness = HexMetrics.WallThicknessOffset(near, far);
+
+        Vector3 v1, v2, v3, v4;
+        Vector3 pointTop = point;
+        point.y = center.y;
+
+        v1 = v3 = center - thickness;
+        v2 = v4 = center + thickness;
+        v3.y = v4.y = pointTop.y = center.y + HexMetrics.wallHeight;
+
+        //		walls.AddQuadUnperturbed(v1, v2, v3, v4);
+        walls.AddQuadUnperturbed(v1, point, v3, pointTop);
+        walls.AddQuadUnperturbed(point, v2, pointTop, v4);
+        walls.AddTriangleUnperturbed(pointTop, v3, v4);
+    }
+
 }
