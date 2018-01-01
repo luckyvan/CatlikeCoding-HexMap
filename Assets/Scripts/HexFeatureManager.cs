@@ -179,7 +179,15 @@ public class HexFeatureManager : MonoBehaviour
             return;
         }
 
-        AddWallSegment(pivot, left, pivot, right);
+        bool hasLeftWall = !leftCell.IsUnderwater &&
+                    pivotCell.GetEdgeType(leftCell) != HexEdgeType.Cliff;
+        bool hasRighWall = !rightCell.IsUnderwater &&
+            pivotCell.GetEdgeType(rightCell) != HexEdgeType.Cliff;
+
+        if (hasLeftWall && hasRighWall)
+        {
+            AddWallSegment(pivot, left, pivot, right);
+        }
     }
 
     public void AddWall(
