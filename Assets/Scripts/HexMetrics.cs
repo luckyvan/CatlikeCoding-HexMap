@@ -213,4 +213,7 @@ public static class HexMetrics
         near.y += (far.y - near.y) * v;
         return near;
     }
+
+    public const float wallTowerThreshold = 0.5f;
+
 }
