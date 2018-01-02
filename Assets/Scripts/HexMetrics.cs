@@ -189,7 +189,9 @@ public static class HexMetrics
         return featureThresholds[level];
     }
 
-    public const float wallHeight = 3f;
+    public const float wallHeight = 4f;
+
+    public const float wallYOffset = -1f;
 
     public const float wallThickness = 0.75f;
 
@@ -210,7 +212,7 @@ public static class HexMetrics
         near.z += (far.z - near.z) * 0.5f;
         float v =
             near.y < far.y ? wallElevationOffset : (1f - wallElevationOffset);
-        near.y += (far.y - near.y) * v;
+        near.y += (far.y - near.y) * v + wallYOffset;
         return near;
     }
 
