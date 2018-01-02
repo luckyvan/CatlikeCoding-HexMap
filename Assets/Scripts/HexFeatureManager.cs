@@ -8,7 +8,7 @@ public class HexFeatureManager : MonoBehaviour
 
     public HexMesh walls;
 
-    public Transform wallTower;
+    public Transform wallTower, bridge;
 
     public void Clear() {
         if (container)
