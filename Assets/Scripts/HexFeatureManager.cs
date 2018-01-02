@@ -305,12 +305,12 @@ public class HexFeatureManager : MonoBehaviour
         instance.localPosition = (roadCenter1 + roadCenter2) * 0.5f;
         instance.forward = roadCenter2 - roadCenter1;
         float length = Vector3.Distance(roadCenter1, roadCenter2);
-        instance.localScale = new Vector3(
-            instance.localScale.x, instance.localScale.y,
-            instance.localScale.z * length * (1f / HexMetrics.bridgeDesignLength));
         //instance.localScale = new Vector3(
-        //   1f, 1f, length * (1f / HexMetrics.bridgeDesignLength)
-        //);
+        //    instance.localScale.x, instance.localScale.y,
+        //    instance.localScale.z * length * (1f / HexMetrics.bridgeDesignLength));
+        instance.localScale = new Vector3(
+            1f, 1f, length * (1f / HexMetrics.bridgeDesignLength)
+        );
         instance.SetParent(container, false);
     }
 }
