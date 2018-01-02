@@ -201,10 +201,14 @@ public class HexFeatureManager : MonoBehaviour
         {
             if (hasRighWall)
             {
-                HexHash hash = HexMetrics.SampleHashGrid(
-                                    (pivot + left + right) * (1f / 3f)
-                                );
-                bool hasTower = hash.e < HexMetrics.wallTowerThreshold;
+                bool hasTower = false;
+                if (leftCell.Elevation == rightCell.Elevation)
+                {
+                    HexHash hash = HexMetrics.SampleHashGrid(
+                        (pivot + left + right) * (1f / 3f)
+                    );
+                    hasTower = hash.e < HexMetrics.wallTowerThreshold;
+                }
                 AddWallSegment(pivot, left, pivot, right, hasTower);
             }
             else if (leftCell.Elevation < rightCell.Elevation)
