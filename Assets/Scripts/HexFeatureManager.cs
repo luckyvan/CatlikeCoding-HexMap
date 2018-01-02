@@ -152,6 +152,13 @@ public class HexFeatureManager : MonoBehaviour
         walls.AddQuadUnperturbed(v2, v1, v4, v3);
 
         walls.AddQuadUnperturbed(t1, t2, v3, v4);
+
+        Transform towerInstance = Instantiate(wallTower);
+        towerInstance.transform.localPosition = (left + right) * 0.5f;
+        Vector3 rightDirection = right - left;
+        rightDirection.y = 0f;
+        towerInstance.transform.right = rightDirection;
+        towerInstance.SetParent(container, false);
     }
 
     void AddWallCap(Vector3 near, Vector3 far)
