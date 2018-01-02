@@ -8,6 +8,8 @@ public class HexFeatureManager : MonoBehaviour
 
     public HexMesh walls;
 
+    public Transform wallTower;
+
     public void Clear() {
         if (container)
         {

@@ -747,6 +747,7 @@ MonoBehaviour:
     - {fileID: 4326589369700288, guid: 10d5d07aeeb220d4caaa52c285842876, type: 2}
     - {fileID: 4326589369700288, guid: f9d8b1b4f6c417442874bcc5cadcddab, type: 2}
   walls: {fileID: 114151425040246606}
+  wallTower: {fileID: 4377701993681276, guid: 8c0008db677108e44aaa134ca8381e55, type: 2}
 --- !u!114 &114356651231974316
 MonoBehaviour:
   m_ObjectHideFlags: 1
