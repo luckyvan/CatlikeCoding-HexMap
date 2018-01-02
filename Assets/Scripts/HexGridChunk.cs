@@ -596,8 +596,8 @@ public class HexGridChunk : MonoBehaviour
             {
                 return;
             }
-            Vector3 offset = HexMetrics.GetSolidEdgeMiddle(middle) * 0.25f;
-            roadCenter += offset;
+            Vector3 offset = HexMetrics.GetSolidEdgeMiddle(middle);
+            roadCenter += offset * 0.25f;
             if (direction == middle &&
                 cell.HasRoadThroughEdge(direction.Opposite()))
             {
