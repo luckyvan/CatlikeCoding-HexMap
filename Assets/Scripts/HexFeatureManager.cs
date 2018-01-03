@@ -307,12 +307,18 @@ public class HexFeatureManager : MonoBehaviour
         instance.localPosition = (roadCenter1 + roadCenter2) * 0.5f;
         instance.forward = roadCenter2 - roadCenter1;
         float length = Vector3.Distance(roadCenter1, roadCenter2);
-        //instance.localScale = new Vector3(
-        //    instance.localScale.x, instance.localScale.y,
-        //    instance.localScale.z * length * (1f / HexMetrics.bridgeDesignLength));
         instance.localScale = new Vector3(
             1f, 1f, length * (1f / HexMetrics.bridgeDesignLength)
         );
+        instance.SetParent(container, false);
+    }
+
+    public void AddSpecialFeature(HexCell cell, Vector3 position)
+    {
+        Transform instance = Instantiate(special[cell.SpecialIndex - 1]);
+        instance.localPosition = HexMetrics.Perturb(position);
+        HexHash hash = HexMetrics.SampleHashGrid(position);
+        instance.localRotation = Quaternion.Euler(0f, 360f * hash.e, 0f);
         instance.SetParent(container, false);
     }
 }
