@@ -10,6 +10,8 @@ public class HexFeatureManager : MonoBehaviour
 
     public Transform wallTower, bridge;
 
+    public Transform[] special;
+
     public void Clear() {
         if (container)
         {
