@@ -6,7 +6,7 @@ public class HexGrid : MonoBehaviour
 
     int cellCountX, cellCountZ;
 
-    public Color defaultColor = Color.white;
+    //public Color defaultColor = Color.white;
 
     public Color touchedColor = Color.magenta;
 
@@ -26,10 +26,13 @@ public class HexGrid : MonoBehaviour
 
     public int seed;
 
+    public Color[] colors;
+
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
         HexMetrics.InitializeHashGrid(seed);
+        HexMetrics.colors = colors;
 
         cellCountX = chunkCountX * HexMetrics.chunkSizeX;
         cellCountZ = chunkCountZ * HexMetrics.chunkSizeZ;
@@ -76,7 +79,7 @@ public class HexGrid : MonoBehaviour
         //cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        cell.Color = defaultColor;
+        //cell.Color = defaultColor;
 
         if (x > 0)
         {
@@ -143,6 +146,7 @@ public class HexGrid : MonoBehaviour
         {
             HexMetrics.noiseSource = noiseSource;
             HexMetrics.InitializeHashGrid(seed);
+            HexMetrics.colors = colors;
         }
     }
     void AddCellToChunk(int x, int z, HexCell cell)

@@ -6188,7 +6188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fe44d1ab9bea242ac1c844232d2173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
   touchedColor: {r: 1, g: 0, b: 1, a: 1}
   cellLabelPrefab: {fileID: 114207804599262258, guid: 9cf849b374232af41beaaae4446b697b,
     type: 2}
@@ -6200,6 +6199,12 @@ MonoBehaviour:
   chunkCountX: 4
   chunkCountZ: 3
   seed: 1234
+  colors:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.9852941, g: 0.40051305, b: 0.02173445, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1185849612
 Transform:
   m_ObjectHideFlags: 0
