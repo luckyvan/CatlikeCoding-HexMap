@@ -9,20 +9,27 @@ public class HexCell : MonoBehaviour
     {
         get
         {
-            return color;
-        }
-        set
-        {
-            if (color == value)
-            {
-                return;
-            }
-            color = value;
-            Refresh();
+            return HexMetrics.colors[terrainTypeIndex];
         }
     }
 
-    Color color;
+    public int TerrainTypeIndex
+    {
+        get
+        {
+            return terrainTypeIndex;
+        }
+        set
+        {
+            if (terrainTypeIndex != value)
+            {
+                terrainTypeIndex = value;
+                Refresh();
+            }
+        }
+    }
+    //Color color;
+    int terrainTypeIndex;
 
     [SerializeField]
     bool[] roads;
