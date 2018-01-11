@@ -265,4 +265,12 @@ public class HexMapEditor : MonoBehaviour
     {
         activeTerrainTypeIndex = index;
     }
+
+    public void Save()
+    {
+    }
+
+    public void Load()
+    {
+    }
 }
