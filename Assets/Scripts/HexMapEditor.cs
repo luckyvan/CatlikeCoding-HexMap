@@ -270,8 +270,10 @@ public class HexMapEditor : MonoBehaviour
     public void Save()
     {
         string path = Path.Combine(Application.persistentDataPath, "test.map");
-        Stream fileStream = File.Open(path, FileMode.Create);
-        fileStream.Close();
+        BinaryWriter writer =
+                    new BinaryWriter(File.Open(path, FileMode.Create));
+        writer.Write(123);
+        writer.Close();
     }
 
     public void Load()
