@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.IO;
 
 public class HexCell : MonoBehaviour
 {
@@ -499,4 +500,11 @@ public class HexCell : MonoBehaviour
 
     int specialIndex;
 
+    public void Save(BinaryWriter writer)
+    {
+    }
+
+    public void Load(BinaryReader reader)
+    {
+    }
 }
