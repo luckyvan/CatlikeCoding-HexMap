@@ -5,7 +5,7 @@ using System.IO;
 public class HexGrid : MonoBehaviour
 {
 
-    int cellCountX, cellCountZ;
+    public int cellCountX = 20, cellCountZ = 15;
 
     //public Color defaultColor = Color.white;
 
@@ -21,7 +21,7 @@ public class HexGrid : MonoBehaviour
 
     public Texture2D noiseSource;
 
-    public int chunkCountX = 4, chunkCountZ = 3;
+    int chunkCountX, chunkCountZ;
 
     HexGridChunk[] chunks;
 
@@ -48,8 +48,8 @@ public class HexGrid : MonoBehaviour
             }
         }
 
-        cellCountX = chunkCountX * HexMetrics.chunkSizeX;
-        cellCountZ = chunkCountZ * HexMetrics.chunkSizeZ;
+        chunkCountX = cellCountX / HexMetrics.chunkSizeX;
+        chunkCountZ = cellCountZ / HexMetrics.chunkSizeZ;
 
         CreateChunks();
         CreateCells();

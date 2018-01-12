@@ -6633,6 +6633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fe44d1ab9bea242ac1c844232d2173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellCountX: 20
+  cellCountZ: 15
   touchedColor: {r: 1, g: 0, b: 1, a: 1}
   cellLabelPrefab: {fileID: 114207804599262258, guid: 9cf849b374232af41beaaae4446b697b,
     type: 2}
@@ -6641,8 +6643,6 @@ MonoBehaviour:
   chunkPrefab: {fileID: 114653194908754372, guid: 41f59c64118891d4b88912a588799b9d,
     type: 2}
   noiseSource: {fileID: 2800000, guid: 38701cdeb1fb9427cbb585f917aa59cb, type: 3}
-  chunkCountX: 4
-  chunkCountZ: 3
   seed: 1234
   colors:
   - {r: 1, g: 1, b: 0, a: 1}
