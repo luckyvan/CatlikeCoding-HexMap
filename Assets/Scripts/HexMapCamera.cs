@@ -114,4 +114,8 @@ public class HexMapCamera : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0f, rotationAngle, 0f);
     }
 
+    public static void ValidatePosition()
+    {
+        instance.AdjustPosition(0f, 0f);
+    }
 }
