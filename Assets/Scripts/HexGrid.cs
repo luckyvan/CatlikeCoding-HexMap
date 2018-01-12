@@ -35,11 +35,23 @@ public class HexGrid : MonoBehaviour
         HexMetrics.InitializeHashGrid(seed);
         HexMetrics.colors = colors;
 
-        CreateMap();
+        CreateMap(cellCountX, cellCountZ);
     }
 
-    public void CreateMap()
+    public void CreateMap(int x, int z)
     {
+        if (
+            x <= 0 || x % HexMetrics.chunkSizeX != 0 ||
+            z <= 0 || z % HexMetrics.chunkSizeZ != 0
+        )
+        {
+            Debug.LogError("Unsupported map size.");
+            return;
+        }
+
+        cellCountX = x;
+        cellCountZ = z;
+
         if (chunks != null)
         {
             for (int i = 0; i < chunks.Length; i++)
