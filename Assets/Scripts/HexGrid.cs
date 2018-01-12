@@ -35,6 +35,11 @@ public class HexGrid : MonoBehaviour
         HexMetrics.InitializeHashGrid(seed);
         HexMetrics.colors = colors;
 
+        CreateMap();
+    }
+
+    public void CreateMap()
+    {
         cellCountX = chunkCountX * HexMetrics.chunkSizeX;
         cellCountZ = chunkCountZ * HexMetrics.chunkSizeZ;
 
