@@ -3,6 +3,8 @@
 public class HexMapCamera : MonoBehaviour
 {
 
+    static HexMapCamera instance;
+
     Transform swivel, stick;
 
     float zoom = 1f;
@@ -21,8 +23,17 @@ public class HexMapCamera : MonoBehaviour
 
     float rotationAngle;
 
+    public static bool Locked
+    {
+        set
+        {
+            instance.enabled = !value;
+        }
+    }
+
     void Awake()
     {
+        instance = this;
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
     }
