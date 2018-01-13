@@ -10166,8 +10166,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: CreateMediumMap
+      - m_Target: {fileID: 1942128055}
+        m_MethodName: Action
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12848,7 +12848,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ec941dba30a54699866d492afd54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuLabel: {fileID: 1403872681}
+  actionButtonLabel: {fileID: 737279695}
   hexGrid: {fileID: 1185849611}
+  nameInput: {fileID: 1178163434}
 --- !u!114 &1942128056
 MonoBehaviour:
   m_ObjectHideFlags: 0
