@@ -12852,6 +12852,9 @@ MonoBehaviour:
   actionButtonLabel: {fileID: 737279695}
   hexGrid: {fileID: 1185849611}
   nameInput: {fileID: 1178163434}
+  listContent: {fileID: 1911477953}
+  itemPrefab: {fileID: 114783716257507168, guid: b0a4fd1f41bf6624ba5ccebbe9362321,
+    type: 2}
 --- !u!114 &1942128056
 MonoBehaviour:
   m_ObjectHideFlags: 0
