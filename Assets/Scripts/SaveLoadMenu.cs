@@ -131,4 +131,21 @@ public class SaveLoadMenu : MonoBehaviour
             item.transform.SetParent(listContent, false);
         }
     }
+
+    public void Delete()
+    {
+        string path = GetSelectedPath();
+        if (path == null)
+        {
+            return;
+        }
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
+        nameInput.text = "";
+        FillList();
+    }
 }
