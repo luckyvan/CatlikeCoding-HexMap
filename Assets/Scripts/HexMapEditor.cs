@@ -288,6 +288,7 @@ public class HexMapEditor : MonoBehaviour
             if (header == 0)
             {
                 hexGrid.Load(reader);
+                HexMapCamera.ValidatePosition();
             }
             else
             {
