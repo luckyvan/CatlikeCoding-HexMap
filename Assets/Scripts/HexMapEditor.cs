@@ -286,9 +286,9 @@ public class HexMapEditor : MonoBehaviour
         using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
         {
             int header = reader.ReadInt32();
-            if (header == 1)
+            if (header <= 1)
             {
-                hexGrid.Load(reader);
+                hexGrid.Load(reader, header);
                 HexMapCamera.ValidatePosition();
             }
             else
