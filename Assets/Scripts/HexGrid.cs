@@ -38,7 +38,7 @@ public class HexGrid : MonoBehaviour
         CreateMap(cellCountX, cellCountZ);
     }
 
-    public void CreateMap(int x, int z)
+    public bool CreateMap(int x, int z)
     {
         if (
             x <= 0 || x % HexMetrics.chunkSizeX != 0 ||
@@ -46,7 +46,7 @@ public class HexGrid : MonoBehaviour
         )
         {
             Debug.LogError("Unsupported map size.");
-            return;
+            return false;
         }
 
         cellCountX = x;
@@ -65,6 +65,8 @@ public class HexGrid : MonoBehaviour
 
         CreateChunks();
         CreateCells();
+
+        return true;
     }
 
     private void CreateCells()
@@ -213,8 +215,14 @@ public class HexGrid : MonoBehaviour
             z = reader.ReadInt32();
         }
 
-        CreateMap(x, z);
-
+        if (x != cellCountX || z != cellCountZ)
+        {
+            if (!CreateMap(x, z))
+            {
+                return;
+            }
+        }
+    
         for (int i = 0; i < cells.Length; i++)
         {
             cells[i].Load(reader);
