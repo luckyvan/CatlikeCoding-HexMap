@@ -10,6 +10,10 @@ public class HexGridChunk : MonoBehaviour
 
     public HexFeatureManager features;
 
+    static Color color1 = new Color(1f, 0f, 0f);
+    static Color color2 = new Color(0f, 1f, 0f);
+    static Color color3 = new Color(0f, 0f, 1f);
+
     void Awake()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
@@ -305,7 +309,7 @@ public class HexGridChunk : MonoBehaviour
         HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
         )
     {
-        TriangulateEdgeFan(center, e, cell.Color);
+        TriangulateEdgeFan(center, e, color1);
 
         if (cell.HasRoads)
         {
