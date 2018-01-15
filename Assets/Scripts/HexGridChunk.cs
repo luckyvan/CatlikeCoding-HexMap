@@ -934,10 +934,10 @@ public class HexGridChunk : MonoBehaviour
             b = -b;
         }
         Vector3 boundary = Vector3.Lerp(HexMetrics.Perturb(begin), HexMetrics.Perturb(left), b);
-        Color boundaryColor = Color.Lerp(color1, color3, b);
+        Color boundaryColor = Color.Lerp(color1, color2, b);
 
         TriangulateBoundaryTriangle(
-            right, color1, begin, color2, boundary, boundaryColor
+            right, color3, begin, color1, boundary, boundaryColor
         );
 
         if (leftCell.GetEdgeType(rightCell) == HexEdgeType.Slope)
