@@ -309,7 +309,7 @@ public class HexGridChunk : MonoBehaviour
         HexDirection direction, HexCell cell, Vector3 center, EdgeVertices e
         )
     {
-        TriangulateEdgeFan(center, e, color1);
+        TriangulateEdgeFan(center, e, cell.TerrainTypeIndex);
 
         if (cell.HasRoads)
         {
@@ -360,7 +360,7 @@ public class HexGridChunk : MonoBehaviour
         );
 
         TriangulateEdgeStrip(m, color1, e, color1);
-        TriangulateEdgeFan(center, m, color1);
+        TriangulateEdgeFan(center, m, cell.TerrainTypeIndex);
 
         if (!cell.IsUnderwater && !cell.HasRoadThroughEdge(direction))
         {
@@ -444,7 +444,7 @@ public class HexGridChunk : MonoBehaviour
 
         m.v3.y = e.v3.y;
         TriangulateEdgeStrip(m, color1, e, color1);
-        TriangulateEdgeFan(center, m, color1);
+        TriangulateEdgeFan(center, m, cell.TerrainTypeIndex);
 
         if (!cell.IsUnderwater)
         {
@@ -980,16 +980,24 @@ public class HexGridChunk : MonoBehaviour
         terrain.AddTriangleColor(c2, leftColor, boundaryColor);
     }
 
-    void TriangulateEdgeFan(Vector3 center, EdgeVertices edge, Color color)
+    void TriangulateEdgeFan(Vector3 center, EdgeVertices edge, float type)
     {
         terrain.AddTriangle(center, edge.v1, edge.v2);
-        terrain.AddTriangleColor(color);
         terrain.AddTriangle(center, edge.v2, edge.v3);
-        terrain.AddTriangleColor(color);
         terrain.AddTriangle(center, edge.v3, edge.v4);
-        terrain.AddTriangleColor(color);
         terrain.AddTriangle(center, edge.v4, edge.v5);
-        terrain.AddTriangleColor(color);
+
+        terrain.AddTriangleColor(color1);
+        terrain.AddTriangleColor(color1);
+        terrain.AddTriangleColor(color1);
+        terrain.AddTriangleColor(color1);
+
+        Vector3 types;
+        types.x = types.y = types.z = type;
+        terrain.AddTriangleTerrainTypes(types);
+        terrain.AddTriangleTerrainTypes(types);
+        terrain.AddTriangleTerrainTypes(types);
+        terrain.AddTriangleTerrainTypes(types);
     }
 
     void TriangulateEdgeStrip(
