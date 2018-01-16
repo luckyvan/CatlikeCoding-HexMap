@@ -53,8 +53,6 @@ public static class HexMetrics
 
     static HexHash[] hashGrid;
 
-    public static Color[] colors;
-
     public static Vector3 GetFirstCorner(HexDirection direction)
     {
         return corners[(int)direction];

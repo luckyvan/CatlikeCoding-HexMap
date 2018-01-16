@@ -27,13 +27,10 @@ public class HexGrid : MonoBehaviour
 
     public int seed;
 
-    public Color[] colors;
-
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
         HexMetrics.InitializeHashGrid(seed);
-        HexMetrics.colors = colors;
 
         CreateMap(cellCountX, cellCountZ);
     }
@@ -174,7 +171,6 @@ public class HexGrid : MonoBehaviour
         {
             HexMetrics.noiseSource = noiseSource;
             HexMetrics.InitializeHashGrid(seed);
-            HexMetrics.colors = colors;
         }
     }
     void AddCellToChunk(int x, int z, HexCell cell)
