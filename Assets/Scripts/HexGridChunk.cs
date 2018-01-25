@@ -20,7 +20,6 @@ public class HexGridChunk : MonoBehaviour
         terrain = GetComponentInChildren<HexMesh>();
 
         cells = new HexCell[HexMetrics.chunkSizeX * HexMetrics.chunkSizeZ];
-        ShowUI(false);
     }
 
     void Start()

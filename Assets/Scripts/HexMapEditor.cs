@@ -193,11 +193,6 @@ public class HexMapEditor : MonoBehaviour
         brushSize = (int)size;
     }
 
-    public void ShowUI(bool visible)
-    {
-        hexGrid.ShowUI(visible);
-    }
-
     public void SetRiverMode(int mode)
     {
         riverMode = (OptionalToggle)mode;
@@ -290,5 +285,6 @@ public class HexMapEditor : MonoBehaviour
     public void SetEditMode(bool toggle)
     {
         editMode = toggle;
+        hexGrid.ShowUI(!toggle);
     }
 }
