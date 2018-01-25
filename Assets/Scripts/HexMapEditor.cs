@@ -21,6 +21,8 @@ public class HexMapEditor : MonoBehaviour
 
     bool applyUrbanLevel, applyFarmLevel, applyPlantLevel, applySpecialIndex;
 
+    bool editMode;
+
     enum OptionalToggle
     {
         Ignore, Yes, No
@@ -68,7 +70,10 @@ public class HexMapEditor : MonoBehaviour
             {
                 isDrag = false;
             }
-            EditCells(currentCell);
+            if (editMode)
+            {
+                EditCells(currentCell);
+            }
             previousCell = currentCell;
         }
         else
@@ -280,5 +285,10 @@ public class HexMapEditor : MonoBehaviour
         {
             terrainMaterial.DisableKeyword("GRID_ON");
         }
+    }
+
+    public void SetEditMode(bool toggle)
+    {
+        editMode = toggle;
     }
 }
