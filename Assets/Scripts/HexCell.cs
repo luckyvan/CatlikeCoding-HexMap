@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class HexCell : MonoBehaviour
 {
@@ -588,5 +589,26 @@ public class HexCell : MonoBehaviour
         Vector3 uiPosition = uiRect.localPosition;
         uiPosition.z = -position.y;
         uiRect.localPosition = uiPosition;
+    }
+
+    int distance;
+
+    void UpdateDistanceLabel()
+    {
+        Text label = uiRect.GetComponent<Text>();
+        label.text = distance.ToString();
+    }
+
+    public int Distance
+    {
+        get
+        {
+            return distance;
+        }
+        set
+        {
+            distance = value;
+            UpdateDistanceLabel();
+        }
     }
 }

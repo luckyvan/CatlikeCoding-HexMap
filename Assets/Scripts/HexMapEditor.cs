@@ -70,9 +70,14 @@ public class HexMapEditor : MonoBehaviour
             {
                 isDrag = false;
             }
+
             if (editMode)
             {
                 EditCells(currentCell);
+            }
+            else
+            {
+                hexGrid.FindDistancesTo(currentCell);
             }
             previousCell = currentCell;
         }
