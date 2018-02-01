@@ -267,6 +267,10 @@ public class HexGrid : MonoBehaviour
                 {
                     continue;
                 }
+                if (current.GetEdgeType(neighbor) == HexEdgeType.Cliff)
+                {
+                    continue;
+                }
 
                 neighbor.Distance = current.Distance + 1;
                 frontier.Enqueue(neighbor);
