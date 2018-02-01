@@ -259,12 +259,18 @@ public class HexGrid : MonoBehaviour
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
-                if (neighbor != null && neighbor.Distance == int.MaxValue)
+                if (neighbor == null || neighbor.Distance != int.MaxValue)
                 {
-                    neighbor.Distance = current.Distance + 1;
-                    frontier.Enqueue(neighbor);
+                    continue;
                 }
-            }
+                if (neighbor.IsUnderwater)
+                {
+                    continue;
+                }
+
+                neighbor.Distance = current.Distance + 1;
+                frontier.Enqueue(neighbor);
+              }
         }
     }
 }
