@@ -255,7 +255,7 @@ public class HexGrid : MonoBehaviour
         while (frontier.Count > 0)
         {
             yield return delay;
-            HexCell current = frontier.[0];
+            HexCell current = frontier[0];
             frontier.RemoveAt(0);
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
