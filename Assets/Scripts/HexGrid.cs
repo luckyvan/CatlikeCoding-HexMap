@@ -268,7 +268,8 @@ public class HexGrid : MonoBehaviour
                 {
                     continue;
                 }
-                if (current.GetEdgeType(neighbor) == HexEdgeType.Cliff)
+                HexEdgeType edgeType = current.GetEdgeType(neighbor);
+                if (edgeType == HexEdgeType.Cliff)
                 {
                     continue;
                 }
@@ -280,7 +281,7 @@ public class HexGrid : MonoBehaviour
                 }
                 else
                 {
-                    distance += 10;
+                    distance += edgeType == HexEdgeType.Flat ? 5 : 10;
                 }
                 if (neighbor.Distance == int.MaxValue)
                 {
