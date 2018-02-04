@@ -279,9 +279,15 @@ public class HexGrid : MonoBehaviour
                 {
                     distance += 1;
                 }
+                else if (current.Walled != neighbor.Walled)
+                {
+                    continue;
+                }
                 else
                 {
                     distance += edgeType == HexEdgeType.Flat ? 5 : 10;
+                    distance += neighbor.UrbanLevel + neighbor.FarmLevel +
+                            neighbor.PlantLevel;
                 }
                 if (neighbor.Distance == int.MaxValue)
                 {
