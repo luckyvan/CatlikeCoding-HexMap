@@ -32,7 +32,7 @@ public class HexMapEditor : MonoBehaviour
 
     bool isDrag;
     HexDirection dragDirection;
-    HexCell previousCell;
+    HexCell previousCell, searchFromCell;
 
     public Material terrainMaterial;
 
@@ -74,6 +74,15 @@ public class HexMapEditor : MonoBehaviour
             if (editMode)
             {
                 EditCells(currentCell);
+            }
+            else if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (searchFromCell)
+                {
+                    searchFromCell.DisableHighlight();
+                }
+                searchFromCell = currentCell;
+                searchFromCell.EnableHighlight(Color.blue);
             }
             else
             {
