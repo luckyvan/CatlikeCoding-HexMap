@@ -84,9 +84,9 @@ public class HexMapEditor : MonoBehaviour
                 searchFromCell = currentCell;
                 searchFromCell.EnableHighlight(Color.blue);
             }
-            else
+            else if (searchFromCell && searchFromCell != currentCell)
             {
-                hexGrid.FindDistancesTo(currentCell);
+                hexGrid.FindPath(searchFromCell, currentCell);
             }
             previousCell = currentCell;
         }
