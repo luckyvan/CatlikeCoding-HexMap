@@ -626,4 +626,6 @@ public class HexCell : MonoBehaviour
     }
 
     public HexCell PathFrom { get; set; }
+
+    public int SearchHeuristic { get; set; }
 }
