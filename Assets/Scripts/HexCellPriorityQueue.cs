@@ -17,6 +17,13 @@ public class HexCellPriorityQueue
 
     public void Enqueue(HexCell cell)
     {
+        int priority = cell.SearchPriority;
+        while (priority >= list.Count)
+        {
+            list.Add(null);
+        }
+        cell.NextWithSamePriority = list[priority];
+        list[priority] = cell;
         count += 1;
     }
 
@@ -35,4 +42,6 @@ public class HexCellPriorityQueue
         list.Clear();
         count = 0;
     }
+
+    public HexCell NextWithSamePriority { get; set; }
 }
