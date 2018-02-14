@@ -78,5 +78,4 @@ public class HexCellPriorityQueue
         minimum = int.MaxValue;
     }
 
-    public HexCell NextWithSamePriority { get; set; }
 }

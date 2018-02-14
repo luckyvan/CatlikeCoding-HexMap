@@ -29,6 +29,8 @@ public class HexGrid : MonoBehaviour
 
     public int seed;
 
+    HexCellPriorityQueue searchFrontier;
+
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
@@ -242,6 +244,15 @@ public class HexGrid : MonoBehaviour
 
     IEnumerator Search(HexCell fromCell, HexCell toCell)
     {
+        if (searchFrontier == null)
+        {
+            searchFrontier = new HexCellPriorityQueue();
+        }
+        else
+        {
+            searchFrontier.Clear();
+        }
+
         for (int i = 0; i < cells.Length; i++)
         {
             cells[i].Distance = int.MaxValue;
@@ -251,15 +262,13 @@ public class HexGrid : MonoBehaviour
         toCell.EnableHighlight(Color.red);
 
         WaitForSeconds delay = new WaitForSeconds(1 / 60f);
-        List<HexCell> frontier = new List<HexCell>();
         fromCell.Distance = 0;
-        frontier.Add(fromCell);
+        searchFrontier.Enqueue(fromCell);
 
-        while (frontier.Count > 0)
+        while (searchFrontier.Count > 0)
         {
             yield return delay;
-            HexCell current = frontier[0];
-            frontier.RemoveAt(0);
+            HexCell current = searchFrontier.Dequeue();
 
             if (current == toCell)
             {
@@ -310,16 +319,15 @@ public class HexGrid : MonoBehaviour
                     neighbor.PathFrom = current;
                     neighbor.SearchHeuristic =
                         neighbor.coordinates.DistanceTo(toCell.coordinates);
-                    frontier.Add(neighbor);
+                    searchFrontier.Enqueue(neighbor);
                 }
                 else if (distance < neighbor.Distance)
                 {
+                    int oldPriority = neighbor.SearchPriority;
                     neighbor.Distance = distance;
                     neighbor.PathFrom = current;
+                    searchFrontier.Change(neighbor, oldPriority);
                 }
-                frontier.Sort(
-                            (x, y) => x.SearchPriority.CompareTo(y.SearchPriority)
-                        );
             }
         }
     }
