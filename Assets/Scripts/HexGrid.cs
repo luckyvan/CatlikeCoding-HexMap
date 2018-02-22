@@ -236,14 +236,15 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    public void FindPath(HexCell fromCell, HexCell toCell)
+    public void FindPath(HexCell fromCell, HexCell toCell, int speed)
     {
         StopAllCoroutines();
-        StartCoroutine(Search(fromCell, toCell));
+        StartCoroutine(Search(fromCell, toCell, speed));
     }
 
-    IEnumerator Search(HexCell fromCell, HexCell toCell)
+    IEnumerator Search(HexCell fromCell, HexCell toCell, int speed)
     {
+        {
         if (searchFrontier == null)
         {
             searchFrontier = new HexCellPriorityQueue();
