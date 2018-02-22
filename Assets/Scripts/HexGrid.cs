@@ -244,7 +244,6 @@ public class HexGrid : MonoBehaviour
 
     IEnumerator Search(HexCell fromCell, HexCell toCell, int speed)
     {
-        {
         if (searchFrontier == null)
         {
             searchFrontier = new HexCellPriorityQueue();
@@ -282,6 +281,7 @@ public class HexGrid : MonoBehaviour
                 break;
             }
 
+            int currentTurn = current.Distance / speed;
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
@@ -314,6 +314,8 @@ public class HexGrid : MonoBehaviour
                     distance += neighbor.UrbanLevel + neighbor.FarmLevel +
                             neighbor.PlantLevel;
                 }
+
+                int turn = distance / speed;
                 if (neighbor.Distance == int.MaxValue)
                 {
                     neighbor.Distance = distance;
