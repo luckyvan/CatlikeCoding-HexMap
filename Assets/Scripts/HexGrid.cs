@@ -299,10 +299,11 @@ public class HexGrid : MonoBehaviour
                     continue;
                 }
 
-                int distance = current.Distance;
+                
+                int moveCost;
                 if (current.HasRoadThroughEdge(d))
                 {
-                    distance += 1;
+                    moveCost = 1;
                 }
                 else if (current.Walled != neighbor.Walled)
                 {
@@ -310,12 +311,17 @@ public class HexGrid : MonoBehaviour
                 }
                 else
                 {
-                    distance += edgeType == HexEdgeType.Flat ? 5 : 10;
-                    distance += neighbor.UrbanLevel + neighbor.FarmLevel +
+                    moveCost = edgeType == HexEdgeType.Flat ? 5 : 10;
+                    moveCost = neighbor.UrbanLevel + neighbor.FarmLevel +
                             neighbor.PlantLevel;
                 }
 
+                int distance = current.Distance + moveCost;
                 int turn = distance / speed;
+                if (turn > currentTurn)
+                {
+                    distance = turn * speed + moveCost;
+                }
                 if (neighbor.Distance == int.MaxValue)
                 {
                     neighbor.Distance = distance;
