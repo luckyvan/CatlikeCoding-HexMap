@@ -636,4 +636,7 @@ public class HexCell : MonoBehaviour
         UnityEngine.UI.Text label = uiRect.GetComponent<Text>();
         label.text = text;
     }
+
+    public int SearchPhase { get; set; }
+
 }
