@@ -272,6 +272,7 @@ public class HexGrid : MonoBehaviour
         while (searchFrontier.Count > 0)
         {
             HexCell current = searchFrontier.Dequeue();
+            current.SearchPhase += 1;
 
             if (current == toCell)
             {
@@ -290,7 +291,8 @@ public class HexGrid : MonoBehaviour
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
-                if (neighbor == null)
+                if (neighbor == null || 
+                    neighbor.SearchPhase > searchFrontierPhase)
                 {
                     continue;
                 }
