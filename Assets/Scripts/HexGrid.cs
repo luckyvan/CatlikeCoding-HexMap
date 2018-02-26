@@ -245,7 +245,7 @@ public class HexGrid : MonoBehaviour
         Debug.Log(sw.ElapsedMilliseconds);
     }
 
-    void Search(HexCell fromCell, HexCell toCell, int speed)
+    bool Search(HexCell fromCell, HexCell toCell, int speed)
     {
         searchFrontierPhase += 2;
 
@@ -258,13 +258,6 @@ public class HexGrid : MonoBehaviour
             searchFrontier.Clear();
         }
 
-        for (int i = 0; i < cells.Length; i++)
-        {
-            cells[i].SetLabel(null);
-            cells[i].DisableHighlight();
-        }
-        fromCell.EnableHighlight(Color.blue);
-
         fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
         searchFrontier.Enqueue(fromCell);
@@ -276,15 +269,7 @@ public class HexGrid : MonoBehaviour
 
             if (current == toCell)
             {
-                while (current != fromCell)
-                {
-                    int turn = current.Distance / speed;
-                    current.SetLabel(turn.ToString());
-                    current.EnableHighlight(Color.white);
-                    current = current.PathFrom;
-                }
-                toCell.EnableHighlight(Color.red);
-                break;
+                return true;
             }
             
             int currentTurn = current.Distance / speed;
@@ -348,5 +333,6 @@ public class HexGrid : MonoBehaviour
                 }
             }
         }
+        return false;
     }
 }
