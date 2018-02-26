@@ -33,6 +33,9 @@ public class HexGrid : MonoBehaviour
 
     int searchFrontierPhase;
 
+    HexCell currentPathFrom, currentPathTo;
+    bool currentPathExists;
+
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
@@ -240,7 +243,11 @@ public class HexGrid : MonoBehaviour
     {
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         sw.Start();
-        Search(fromCell, toCell, speed);
+
+        currentPathFrom = fromCell;
+        currentPathTo = toCell;
+        currentPathExists = Search(fromCell, toCell, speed);
+
         sw.Stop();
         Debug.Log(sw.ElapsedMilliseconds);
     }
