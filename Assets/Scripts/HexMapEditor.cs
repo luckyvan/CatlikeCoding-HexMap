@@ -36,6 +36,8 @@ public class HexMapEditor : MonoBehaviour
 
     public Material terrainMaterial;
 
+    public HexUnit unitPrefab;
+
     void Awake()
     {
         //SelectColor(0);
@@ -44,24 +46,42 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) &&
-            !EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            HandleInput();
+            if (Input.GetMouseButton(0))
+            {
+                HandleInput();
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                CreateUnit();
+                return;
+            }
         }
-        else
-        {
-            previousCell = null;
-        }
+
+        previousCell = null;
+
     }
 
-    void HandleInput()
+    HexCell GetCellUnderCursor()
     {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit))
         {
-            HexCell currentCell = hexGrid.GetCell(hit.point);
+            return hexGrid.GetCell(hit.point);
+        }
+
+        return null;
+    }
+
+    void HandleInput()
+    {
+        HexCell currentCell = GetCellUnderCursor();
+
+        if (currentCell)
+        {
             if (previousCell && previousCell != currentCell)
             {
                 ValidateDrag(currentCell);
@@ -179,7 +199,7 @@ public class HexMapEditor : MonoBehaviour
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if (otherCell)
                 {
-                    if(riverMode == OptionalToggle.Yes)
+                    if (riverMode == OptionalToggle.Yes)
                     {
                         otherCell.SetOutgoingRiver(dragDirection);
                     }
@@ -230,7 +250,7 @@ public class HexMapEditor : MonoBehaviour
         roadMode = (OptionalToggle)mode;
     }
 
-    public void SetWallMode (int mode)
+    public void SetWallMode(int mode)
     {
         wallMode = (OptionalToggle)mode;
     }
@@ -313,5 +333,17 @@ public class HexMapEditor : MonoBehaviour
     {
         editMode = toggle;
         hexGrid.ShowUI(!toggle);
+    }
+
+    public void CreateUnit()
+    {
+        var cell = GetCellUnderCursor();
+
+        if (cell)
+        {
+            HexUnit unit = Instantiate(unitPrefab);
+            unit.transform.SetParent(hexGrid.transform, false);
+        }
+
     }
 }
