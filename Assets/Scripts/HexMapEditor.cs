@@ -343,6 +343,7 @@ public class HexMapEditor : MonoBehaviour
         {
             HexUnit unit = Instantiate(unitPrefab);
             unit.transform.SetParent(hexGrid.transform, false);
+            unit.Location = cell;
         }
 
     }
