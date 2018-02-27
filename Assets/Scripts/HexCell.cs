@@ -639,4 +639,5 @@ public class HexCell : MonoBehaviour
 
     public int SearchPhase { get; set; }
 
+    public HexUnit Unit { set; get; }
 }

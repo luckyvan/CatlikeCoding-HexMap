@@ -339,7 +339,7 @@ public class HexMapEditor : MonoBehaviour
     {
         var cell = GetCellUnderCursor();
 
-        if (cell)
+        if (cell && !cell.Unit)
         {
             HexUnit unit = Instantiate(unitPrefab);
             unit.transform.SetParent(hexGrid.transform, false);
