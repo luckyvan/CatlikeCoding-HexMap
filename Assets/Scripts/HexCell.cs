@@ -218,6 +218,10 @@ public class HexCell : MonoBehaviour
     private void RefreshSelfOnly()
     {
         chunk.Refresh();
+        if (Unit)
+        {
+            Unit.ValidateLocation();
+        }
     }
 
     public HexDirection RiverBeginOrEndDirection
@@ -386,6 +390,10 @@ public class HexCell : MonoBehaviour
                 {
                     neighbor.chunk.Refresh();
                 }
+            }
+            if (Unit)
+            {
+                Unit.ValidateLocation();
             }
         }
     }
