@@ -55,7 +55,14 @@ public class HexMapEditor : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.U))
             {
-                CreateUnit();
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    DestroyUnit();
+                }
+                else
+                {
+                    CreateUnit();
+                }
                 return;
             }
         }
@@ -347,5 +354,15 @@ public class HexMapEditor : MonoBehaviour
             unit.Orientation = Random.Range(0f, 360f);
         }
 
+    }
+
+    public void DestroyUnit()
+    {
+        var cell = GetCellUnderCursor();
+
+        if (cell && cell.Unit)
+        {
+            cell.Unit.Die();
+        }
     }
 }
