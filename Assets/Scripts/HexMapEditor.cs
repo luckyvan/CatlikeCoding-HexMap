@@ -358,7 +358,7 @@ public class HexMapEditor : MonoBehaviour
 
         if (cell && cell.Unit)
         {
-            cell.Unit.Die();
+            hexGrid.RemoveUnit(cell.Unit);
         }
     }
 }

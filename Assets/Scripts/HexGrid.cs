@@ -367,6 +367,12 @@ public class HexGrid : MonoBehaviour
         unit.Orientation = orientation;
     }
 
+    public void RemoveUnit(HexUnit unit)
+    {
+        units.Remove(unit);
+        unit.Die();
+    }
+
     void ShowPath (int speed)
     {
         if (currentPathExists)
