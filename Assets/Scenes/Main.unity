@@ -8387,6 +8387,8 @@ MonoBehaviour:
   chunkPrefab: {fileID: 114653194908754372, guid: 41f59c64118891d4b88912a588799b9d,
     type: 2}
   noiseSource: {fileID: 2800000, guid: 38701cdeb1fb9427cbb585f917aa59cb, type: 3}
+  unitPrefab: {fileID: 114917697026509608, guid: 7a7783f33fc3f6e40b13783fdac6b883,
+    type: 2}
   seed: 1234
 --- !u!4 &1185849612
 Transform:
@@ -10491,8 +10493,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexGrid: {fileID: 1185849611}
   terrainMaterial: {fileID: 2100000, guid: 0062d3c00672fbc4396a8fc8bc51fb4c, type: 2}
-  unitPrefab: {fileID: 114917697026509608, guid: 7a7783f33fc3f6e40b13783fdac6b883,
-    type: 2}
 --- !u!114 &1494675092
 MonoBehaviour:
   m_ObjectHideFlags: 0

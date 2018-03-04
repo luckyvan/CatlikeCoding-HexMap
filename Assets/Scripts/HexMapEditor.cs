@@ -36,8 +36,6 @@ public class HexMapEditor : MonoBehaviour
 
     public Material terrainMaterial;
 
-    public HexUnit unitPrefab;
-
     void Awake()
     {
         //SelectColor(0);
@@ -348,7 +346,7 @@ public class HexMapEditor : MonoBehaviour
 
         if (cell && !cell.Unit)
         {
-            hexGrid.AddUnit(Instantiate(unitPrefab), cell, Random.Range(0, 360f));
+            hexGrid.AddUnit(Instantiate(HexUnit.unitPrefab), cell, Random.Range(0, 360f));
         }
     }
 
