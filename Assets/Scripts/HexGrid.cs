@@ -36,6 +36,8 @@ public class HexGrid : MonoBehaviour
     HexCell currentPathFrom, currentPathTo;
     bool currentPathExists;
 
+    List<HexUnit> units = new List<HexUnit>();
+
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
@@ -59,6 +61,7 @@ public class HexGrid : MonoBehaviour
         cellCountZ = z;
 
         ClearPath();
+        ClearUnits();
 
         if (chunks != null)
         {
@@ -216,6 +219,7 @@ public class HexGrid : MonoBehaviour
     public void Load(BinaryReader reader, int header)
     {
         ClearPath();
+        ClearUnits();
 
         int x = 20, z = 15;
         if (header >= 1)
@@ -252,6 +256,15 @@ public class HexGrid : MonoBehaviour
         currentPathExists = Search(fromCell, toCell, speed);
 
         ShowPath(speed);
+    }
+
+    void ClearUnits()
+    {
+        for (int i = 0; i < units.Count; i++)
+        {
+            units[i].Die();
+        }
+        units.Clear();
     }
 
     bool Search(HexCell fromCell, HexCell toCell, int speed)
