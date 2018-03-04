@@ -348,12 +348,8 @@ public class HexMapEditor : MonoBehaviour
 
         if (cell && !cell.Unit)
         {
-            HexUnit unit = Instantiate(unitPrefab);
-            unit.transform.SetParent(hexGrid.transform, false);
-            unit.Location = cell;
-            unit.Orientation = Random.Range(0f, 360f);
+            hexGrid.AddUnit(Instantiate(unitPrefab), cell, Random.Range(0, 360f));
         }
-
     }
 
     public void DestroyUnit()

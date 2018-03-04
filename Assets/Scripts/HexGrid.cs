@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class HexGrid : MonoBehaviour
 {
@@ -356,6 +357,14 @@ public class HexGrid : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void AddUnit(HexUnit unit, HexCell location, float orientation)
+    {
+        units.Add(unit);
+        unit.transform.SetParent(transform, false);
+        unit.Location = location;
+        unit.Orientation = orientation;
     }
 
     void ShowPath (int speed)
