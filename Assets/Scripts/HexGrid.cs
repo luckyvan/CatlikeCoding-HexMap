@@ -280,6 +280,17 @@ public class HexGrid : MonoBehaviour
         ShowPath(speed);
     }
 
+    public HexCell GetCell(Ray inputRay)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(inputRay, out hit))
+        {
+            return GetCell(hit.point);
+        }
+
+        return null;
+    }
+
     void ClearUnits()
     {
         for (int i = 0; i < units.Count; i++)

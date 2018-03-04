@@ -32,7 +32,7 @@ public class HexMapEditor : MonoBehaviour
 
     bool isDrag;
     HexDirection dragDirection;
-    HexCell previousCell, searchFromCell, searchToCell;
+    HexCell previousCell;
 
     public Material terrainMaterial;
 
@@ -40,6 +40,7 @@ public class HexMapEditor : MonoBehaviour
     {
         //SelectColor(0);
         terrainMaterial.DisableKeyword("GRID_ON");
+        SetEditMode(false);
     }
 
     void Update()
@@ -71,16 +72,9 @@ public class HexMapEditor : MonoBehaviour
 
     HexCell GetCellUnderCursor()
     {
-        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(inputRay, out hit))
-        {
-            return hexGrid.GetCell(hit.point);
-        }
-
-        return null;
+         return hexGrid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
     }
-
+    
     void HandleInput()
     {
         HexCell currentCell = GetCellUnderCursor();
@@ -96,36 +90,8 @@ public class HexMapEditor : MonoBehaviour
                 isDrag = false;
             }
 
-            if (editMode)
-            {
-                EditCells(currentCell);
-            }
-            else if (
-                Input.GetKey(KeyCode.LeftShift) && searchToCell != currentCell
-                )
-            {
-                if (searchFromCell != currentCell)
-                {
-                    if (searchFromCell)
-                    {
-                        searchFromCell.DisableHighlight();
-                    }
-                    searchFromCell = currentCell;
-                    searchFromCell.EnableHighlight(Color.blue);
-                    if (searchToCell)
-                    {
-                        hexGrid.FindPath(searchFromCell, searchToCell, 24);
-                    }
-                }
-            }
-            else if (searchFromCell && searchFromCell != currentCell)
-            {
-                if (searchFromCell != currentCell)
-                {
-                    searchToCell = currentCell;
-                    hexGrid.FindPath(searchFromCell, searchToCell, 24);
-                }
-            }
+            EditCells(currentCell);
+
             previousCell = currentCell;
         }
         else
@@ -336,8 +302,7 @@ public class HexMapEditor : MonoBehaviour
 
     public void SetEditMode(bool toggle)
     {
-        editMode = toggle;
-        hexGrid.ShowUI(!toggle);
+        enabled = toggle;
     }
 
     public void CreateUnit()
