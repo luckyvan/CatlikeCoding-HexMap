@@ -40,4 +40,10 @@ public class HexUnit : MonoBehaviour
         location.Unit = null;
         Destroy(gameObject);
     }
+
+    public void Save(BinaryWriter writer)
+    {
+        location.coordinates.Save(writer);
+        writer.Write(orientation);
+    }
 }
