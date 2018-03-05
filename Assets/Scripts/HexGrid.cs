@@ -422,7 +422,7 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    void ClearPath()
+    public void ClearPath()
     {
         if (currentPathExists)
         {
