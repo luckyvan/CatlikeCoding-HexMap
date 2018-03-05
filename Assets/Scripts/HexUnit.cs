@@ -11,6 +11,10 @@ public class HexUnit : MonoBehaviour
             return location;
         }
         set {
+            if (location)
+            {
+                location.Unit = null;
+            }
             location = value;
             value.Unit = this;
             transform.localPosition = value.Position;

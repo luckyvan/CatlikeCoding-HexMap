@@ -336,7 +336,7 @@ public class HexGrid : MonoBehaviour
                 {
                     continue;
                 }
-                if (neighbor.IsUnderwater)
+                if (neighbor.IsUnderwater || neighbor.Unit)
                 {
                     continue;
                 }
@@ -433,7 +433,21 @@ public class HexGrid : MonoBehaviour
                 current.DisableHighlight();
                 current = current.PathFrom;
             }
+            currentPathFrom.SetLabel(null);
+            currentPathFrom.DisableHighlight();
             currentPathFrom = currentPathTo = null;
+
+            currentPathExists = false;
         }
     }
+
+    public bool HasPath
+    {
+        get
+        {
+            return currentPathExists;
+        }
+    }
+
+
 }
