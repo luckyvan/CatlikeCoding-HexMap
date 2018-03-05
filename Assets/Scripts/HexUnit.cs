@@ -59,4 +59,10 @@ public class HexUnit : MonoBehaviour
             Instantiate(unitPrefab), grid.GetCell(coordinates), orientation
             );
     }
+
+    public bool IsValidDestination(HexCell cell)
+    {
+        return !cell.IsUnderwater && !cell.Unit;
+    }
+
 }
