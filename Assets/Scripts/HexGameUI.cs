@@ -8,6 +8,8 @@ public class HexGameUI : MonoBehaviour
 
     HexCell currentCell;
 
+    HexUnit selectedUnit;
+
     public void SetEditMode(bool toggle)
     {
         enabled = !toggle;
@@ -27,4 +29,25 @@ public class HexGameUI : MonoBehaviour
 
         return false;
     }
+
+    void DoSelection()
+    {
+        UpdateCurrentCell();
+        if (currentCell)
+        {
+            selectedUnit = currentCell.Unit;
+        }
+    }
+
+    void Update()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                DoSelection();
+            }
+        }
+    }
+
 }
