@@ -116,4 +116,12 @@ public class HexUnit : MonoBehaviour
             }
         }
     }
+
+    void OnEnable()
+    {
+        if (location)
+        {
+            transform.localPosition = location.Position;
+        }
+    }
 }
