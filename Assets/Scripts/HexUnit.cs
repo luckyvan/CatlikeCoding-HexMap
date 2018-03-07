@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class HexUnit : MonoBehaviour
 {
     public static HexUnit unitPrefab;
+
+    const float travelSpeed = 4f;
 
     public HexCell Location
     {
@@ -76,7 +79,25 @@ public class HexUnit : MonoBehaviour
     {
         Location = path[path.Count - 1];
         pathToTravel = path;
+
+        StopAllCoroutines();
+        StartCoroutine(TravelPath());
     }
+
+    IEnumerator TravelPath()
+    {
+        for (int i = 1; i < pathToTravel.Count; i++)
+        {
+            Vector3 a = pathToTravel[i - 1].Position;
+            Vector3 b = pathToTravel[i].Position;
+            for (float t = 0f; t < 1f; t += Time.deltaTime * travelSpeed)
+            {
+                transform.localPosition = Vector3.Lerp(a, b, t);
+                yield return null;
+            }
+        }
+    }
+
 
     void OnDrawGizmos()
     {
