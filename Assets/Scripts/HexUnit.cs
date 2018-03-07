@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class HexUnit : MonoBehaviour
@@ -69,4 +70,8 @@ public class HexUnit : MonoBehaviour
         return !cell.IsUnderwater && !cell.Unit;
     }
 
+    public void Travel(List<HexCell> path)
+    {
+        Location = path[path.Count - 1];
+    }
 }

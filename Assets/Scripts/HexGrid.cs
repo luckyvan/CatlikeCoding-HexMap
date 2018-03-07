@@ -433,12 +433,15 @@ public class HexGrid : MonoBehaviour
                 current.DisableHighlight();
                 current = current.PathFrom;
             }
-            currentPathFrom.SetLabel(null);
-            currentPathFrom.DisableHighlight();
-            currentPathFrom = currentPathTo = null;
-
+            current.DisableHighlight();
             currentPathExists = false;
         }
+        else if (currentPathFrom)
+        {
+            currentPathFrom.DisableHighlight();
+            currentPathTo.DisableHighlight();
+        }
+        currentPathFrom = currentPathTo = null;
     }
 
     public bool HasPath
