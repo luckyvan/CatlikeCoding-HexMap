@@ -126,6 +126,7 @@ public class HexGrid : MonoBehaviour
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         //cell.Color = defaultColor;
+        cell.ShaderData = cellShaderData;
 
         if (x > 0)
         {

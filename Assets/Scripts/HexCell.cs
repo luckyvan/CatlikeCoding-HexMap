@@ -18,7 +18,7 @@ public class HexCell : MonoBehaviour
             if (terrainTypeIndex != value)
             {
                 terrainTypeIndex = value;
-                Refresh();
+                ShaderData.RefreshTerrain(this);
             }
         }
     }
@@ -493,6 +493,8 @@ public class HexCell : MonoBehaviour
 
     int specialIndex;
 
+    public HexCellShaderData ShaderData { get; set; }
+
     public void Save(BinaryWriter writer)
     {
         writer.Write((byte)terrainTypeIndex);
@@ -542,6 +544,7 @@ public class HexCell : MonoBehaviour
     public void Load(BinaryReader reader)
     {
         terrainTypeIndex = reader.ReadByte();
+        ShaderData.RefreshTerrain(this);
         elevation = reader.ReadByte();
         RefreshPosition();
         waterLevel = reader.ReadByte();
