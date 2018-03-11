@@ -41,13 +41,15 @@ public class HexGrid : MonoBehaviour
 
     List<HexUnit> units = new List<HexUnit>();
 
+    HexCellShaderData cellShaderData;
+
     void Awake()
     {
         HexMetrics.noiseSource = noiseSource;
         HexMetrics.InitializeHashGrid(seed);
 
         HexUnit.unitPrefab = unitPrefab;
-
+        cellShaderData = gameObject.AddComponent<HexCellShaderData>();
         CreateMap(cellCountX, cellCountZ);
     }
 
@@ -78,7 +80,7 @@ public class HexGrid : MonoBehaviour
 
         chunkCountX = cellCountX / HexMetrics.chunkSizeX;
         chunkCountZ = cellCountZ / HexMetrics.chunkSizeZ;
-
+        cellShaderData.Initialize(chunkCountX, chunkCountZ);
         CreateChunks();
         CreateCells();
 
