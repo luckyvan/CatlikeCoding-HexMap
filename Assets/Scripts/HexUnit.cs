@@ -9,6 +9,8 @@ public class HexUnit : MonoBehaviour
 
     const float travelSpeed = 4f;
 
+    const float rotationSpeed = 180f;
+
     public HexCell Location
     {
         get {
@@ -87,6 +89,8 @@ public class HexUnit : MonoBehaviour
     IEnumerator TravelPath()
     {
         Vector3 a, b, c = pathToTravel[0].Position;
+        transform.localPosition = c;
+        yield return LookAt(pathToTravel[1].Position);
 
         float t = Time.deltaTime * travelSpeed;
         for (int i = 1; i < pathToTravel.Count; i++)
@@ -118,7 +122,33 @@ public class HexUnit : MonoBehaviour
         }
 
         transform.localPosition = location.Position;
-        Orientation = transform.localRotation.eulerAngles.y;
+        orientation = transform.localRotation.eulerAngles.y;
+    }
+
+    IEnumerator LookAt(Vector3 point)
+    {
+        point.y = transform.localPosition.y;
+        Quaternion fromRotation = transform.localRotation;
+        Quaternion toRotation =
+            Quaternion.LookRotation(point - transform.localPosition);
+        float angle = Quaternion.Angle(fromRotation, toRotation);
+        if (angle > 0f)
+        {
+            float speed = rotationSpeed / angle;
+
+            for (
+                float t = Time.deltaTime * speed;
+                t < 1f;
+                t += Time.deltaTime * speed
+                )
+            {
+                transform.localRotation =
+                    Quaternion.Slerp(fromRotation, toRotation, t);
+                yield return null;
+            }
+        }
+        transform.LookAt(point);
+        orientation = transform.localRotation.eulerAngles.y;
     }
 
 
