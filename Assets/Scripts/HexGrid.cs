@@ -80,7 +80,7 @@ public class HexGrid : MonoBehaviour
 
         chunkCountX = cellCountX / HexMetrics.chunkSizeX;
         chunkCountZ = cellCountZ / HexMetrics.chunkSizeZ;
-        cellShaderData.Initialize(chunkCountX, chunkCountZ);
+        cellShaderData.Initialize(cellCountX, cellCountZ);
         CreateChunks();
         CreateCells();
 
