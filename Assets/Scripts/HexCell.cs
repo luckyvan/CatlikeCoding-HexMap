@@ -95,6 +95,8 @@ public class HexCell : MonoBehaviour
     bool hasIncomingRiver, hasOutgoingRiver;
     HexDirection incomingRiver, outgoingRiver;
 
+    int visibility;
+
     public bool HasIncomingRiver
     {
         get
@@ -653,4 +655,31 @@ public class HexCell : MonoBehaviour
     public HexUnit Unit { set; get; }
 
     public int Index { get; set; }
+
+    public bool IsVisible
+    {
+        get
+        {
+            return visibility > 0;
+        }
+    }
+
+    public void IncreaseVisibility()
+    {
+        visibility += 1;
+        if (visibility == 1)
+        {
+            ShaderData.RefreshVisibility(this);
+        }
+    }
+
+    public void DecreaseVisibility()
+    {
+        visibility -= 1;
+        if (visibility == 0)
+        {
+            ShaderData.RefreshVisibility(this);
+        }
+    }
+
 }
