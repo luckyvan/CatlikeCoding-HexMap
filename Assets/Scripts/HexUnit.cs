@@ -19,12 +19,12 @@ public class HexUnit : MonoBehaviour
         set {
             if (location)
             {
-                location.DecreaseVisibility();
+                Grid.DecreaseVisibility(location, visionRange);
                 location.Unit = null;
             }
             location = value;
             value.Unit = this;
-            value.IncreaseVisibility();
+            Grid.IncreaseVisibility(value, visionRange);
             transform.localPosition = value.Position;
         }
     }
@@ -56,7 +56,7 @@ public class HexUnit : MonoBehaviour
     {
         if (location)
         {
-            location.DecreaseVisibility();
+            Grid.DecreaseVisibility(location, visionRange);
         }
         location.Unit = null;
         Destroy(gameObject);
@@ -168,5 +168,9 @@ public class HexUnit : MonoBehaviour
             transform.localPosition = location.Position;
         }
     }
+
+    public HexGrid Grid { get; set; }
+
+    const int visionRange = 3;
 
 }
