@@ -5,6 +5,7 @@
 		_GridTex ("Grid Texture", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Specular ("Specular", Color) = (0.2, 0.2, 0.2)
+		_BackgroundColor ("Background Color", Color) = (0,0,0)
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -33,6 +34,7 @@
 		half _Glossiness;
 		fixed3 _Specular;
 		fixed4 _Color;
+		half3 _BackgroundColor;
 		sampler2D _GridTex;
 
 		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -90,7 +92,7 @@
 			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;
 			o.Occlusion = explored;
-
+			o.Emission = _BackgroundColor * (1 - explored);
 		}
 		ENDCG
 	}
