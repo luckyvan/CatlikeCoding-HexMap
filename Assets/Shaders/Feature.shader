@@ -65,7 +65,7 @@
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			float explored = IN.visibility.y;
-			o.Albedo = c.rgb * (IN.visibility * explored);
+			o.Albedo = c.rgb * (IN.visibility.x * explored);
 			// Metallic and smoothness come from slider variables
 			o.Specular = _Specular * explored;
 			o.Smoothness = _Glossiness;
