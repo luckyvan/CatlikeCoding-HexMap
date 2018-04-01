@@ -16,6 +16,8 @@
 
 		#pragma target 3.5
 
+		#pragma multi_compile _ HEX_MAP_EDIT_MODE
+
 		#pragma multi_compile _ GRID_ON
 
 		#include "HexCellData.cginc"
