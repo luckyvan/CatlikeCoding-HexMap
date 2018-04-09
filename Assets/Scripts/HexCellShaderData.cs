@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HexCellShaderData : MonoBehaviour
@@ -8,9 +9,11 @@ public class HexCellShaderData : MonoBehaviour
 
     Color32[] cellTextureData;
 
-    List<HexCell> transitionCells = new List<HexCell>();
+    List<HexCell> transitioningCells = new List<HexCell>();
 
     public bool ImmediateMode { get; set; }
+
+    const float transitionSpeed = 255f;
 
     public void Initialize(int x, int z)
     {
@@ -43,7 +46,7 @@ public class HexCellShaderData : MonoBehaviour
             }
         }
 
-        transitionCells.Clear();
+        transitioningCells.Clear();
 
         enabled = true;
     }
@@ -65,7 +68,7 @@ public class HexCellShaderData : MonoBehaviour
         }
         else
         {
-            transitionCells.Add(cell);
+            transitioningCells.Add(cell);
         }
 
         enabled = true;
@@ -73,9 +76,32 @@ public class HexCellShaderData : MonoBehaviour
 
     void LateUpdate()
     {
+        int delta = (int)(Time.deltaTime * transitionSpeed);
+        if (delta == 0)
+        {
+            delta = 1;
+        }
+        for (int i = 0; i < transitioningCells.Count; i++)
+        {
+            if(!UpdateCellData(transitioningCells[i], delta))
+            {
+                transitioningCells[i--] =
+                    transitioningCells[transitioningCells.Count - 1];
+                transitioningCells.RemoveAt(transitioningCells.Count - 1);
+            }
+        }
         cellTexture.SetPixels32(cellTextureData);
         cellTexture.Apply();
-        enabled = false;
+        enabled = transitioningCells.Count > 0;
     }
 
+    private bool UpdateCellData(HexCell cell, int delta)
+    {
+        int index = cell.Index;
+        Color32 data = cellTextureData[index];
+        bool stillUpdating = false;
+
+        cellTextureData[index] = data;
+        return stillUpdating;
+    }
 }
