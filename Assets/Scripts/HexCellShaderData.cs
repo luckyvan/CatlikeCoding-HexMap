@@ -7,6 +7,8 @@ public class HexCellShaderData : MonoBehaviour
 
     Color32[] cellTextureData;
 
+    public bool ImmediateMode { get; set; }
+
     public void Initialize(int x, int z)
     {
         if (cellTexture)
