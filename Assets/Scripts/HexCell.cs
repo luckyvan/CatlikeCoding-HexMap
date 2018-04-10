@@ -265,7 +265,13 @@ public class HexCell : MonoBehaviour
             {
                 return;
             }
+
+            int originalViewElevation = ViewElevation;
             elevation = value;
+            if(ViewElevation != originalViewElevation)
+            {
+                ShaderData.ViewElevationChanged();
+            }
 
             RefreshPosition();
 
@@ -325,7 +331,12 @@ public class HexCell : MonoBehaviour
             {
                 return;
             }
+            int originalViewElevation = ViewElevation;
             waterLevel = value;
+            if (ViewElevation != originalViewElevation)
+            {
+                ShaderData.ViewElevationChanged();
+            }
             ValidateRivers();
             Refresh();
         }
@@ -688,4 +699,12 @@ public class HexCell : MonoBehaviour
     }
 
     public bool IsExplored { private set; get; }
+
+    public int ViewElevation
+    {
+        get
+        {
+            return elevation > waterLevel ? elevation : waterLevel;
+        }
+    }
 }

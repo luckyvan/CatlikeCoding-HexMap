@@ -133,4 +133,9 @@ public class HexCellShaderData : MonoBehaviour
         cellTextureData[index] = data;
         return stillUpdating;
     }
+
+    internal void ViewElevationChanged()
+    {
+        throw new NotImplementedException();
+    }
 }
