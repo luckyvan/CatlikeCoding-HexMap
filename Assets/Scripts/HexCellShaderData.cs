@@ -15,6 +15,10 @@ public class HexCellShaderData : MonoBehaviour
 
     const float transitionSpeed = 255f;
 
+    bool needsVisibilityReset;
+
+    public HexGrid Grid { get; set; }
+
     public void Initialize(int x, int z)
     {
         if (cellTexture)
@@ -77,6 +81,12 @@ public class HexCellShaderData : MonoBehaviour
 
     void LateUpdate()
     {
+        if (needsVisibilityReset)
+        {
+            needsVisibilityReset = false;
+            Grid.ResetVisibility();
+        }
+
         int delta = (int)(Time.deltaTime * transitionSpeed);
         if (delta == 0)
         {
@@ -134,8 +144,9 @@ public class HexCellShaderData : MonoBehaviour
         return stillUpdating;
     }
 
-    internal void ViewElevationChanged()
+    public void ViewElevationChanged()
     {
-        throw new NotImplementedException();
+        needsVisibilityReset = true;
+        enabled = true;
     }
 }

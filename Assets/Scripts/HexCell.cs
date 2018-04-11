@@ -707,4 +707,14 @@ public class HexCell : MonoBehaviour
             return elevation > waterLevel ? elevation : waterLevel;
         }
     }
+
+    public void ResetVisibility()
+    {
+        if (visibility > 0)
+        {
+            visibility = 0;
+            ShaderData.RefreshVisibility(this);
+        }
+    }
+
 }

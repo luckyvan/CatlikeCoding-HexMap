@@ -50,6 +50,7 @@ public class HexGrid : MonoBehaviour
 
         HexUnit.unitPrefab = unitPrefab;
         cellShaderData = gameObject.AddComponent<HexCellShaderData>();
+        cellShaderData.Grid = this;
         CreateMap(cellCountX, cellCountZ);
     }
 
@@ -195,6 +196,7 @@ public class HexGrid : MonoBehaviour
             HexMetrics.InitializeHashGrid(seed);
 
             HexUnit.unitPrefab = unitPrefab;
+            ResetVisibility();
         }
     }
     void AddCellToChunk(int x, int z, HexCell cell)
@@ -538,5 +540,19 @@ public class HexGrid : MonoBehaviour
             cell.DecreaseVisibility();
         }
         ListPool<HexCell>.Add(cells);
+    }
+
+    public void ResetVisibility()
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            cells[i].ResetVisibility();
+        }
+
+        for (int i = 0; i < units.Count; i++)
+        {
+            HexUnit unit = units[i];
+            IncreaseVisibility(unit.Location, unit.VisionRange);
+        }
     }
 }
