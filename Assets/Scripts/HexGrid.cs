@@ -400,6 +400,7 @@ public class HexGrid : MonoBehaviour
             searchFrontier.Clear();
         }
 
+        range = fromCell.ViewElevation;
         fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
         searchFrontier.Enqueue(fromCell);
