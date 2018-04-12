@@ -421,7 +421,7 @@ public class HexGrid : MonoBehaviour
                 }
                 
                 int distance = current.Distance + 1;
-                if (distance > range)
+                if (distance + neighbor.ViewElevation > range)
                 {
                     continue;
                 }
