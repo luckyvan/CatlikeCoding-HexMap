@@ -400,11 +400,12 @@ public class HexGrid : MonoBehaviour
             searchFrontier.Clear();
         }
 
-        range = fromCell.ViewElevation;
+        range += fromCell.ViewElevation;
         fromCell.SearchPhase = searchFrontierPhase;
         fromCell.Distance = 0;
         searchFrontier.Enqueue(fromCell);
 
+        HexCoordinates fromCoordinates = fromCell.coordinates;
         while (searchFrontier.Count > 0)
         {
             HexCell current = searchFrontier.Dequeue();
@@ -421,7 +422,8 @@ public class HexGrid : MonoBehaviour
                 }
                 
                 int distance = current.Distance + 1;
-                if (distance + neighbor.ViewElevation > range)
+                if (distance + neighbor.ViewElevation > range ||
+                    distance > fromCoordinates.DistanceTo(neighbor.coordinates))
                 {
                     continue;
                 }
