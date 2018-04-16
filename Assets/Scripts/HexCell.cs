@@ -675,7 +675,7 @@ public class HexCell : MonoBehaviour
     {
         get
         {
-            return visibility > 0;
+            return visibility > 0 && Explorable;
         }
     }
 
@@ -698,7 +698,18 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public bool IsExplored { private set; get; }
+    public bool IsExplored {
+        private set
+        {
+            explored = value;
+        }
+        get
+        {
+            return explored && Explorable;
+        }
+    }
+
+    bool explored;
 
     public int ViewElevation
     {
@@ -717,4 +728,5 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public bool Explorable { get; set; }
 }

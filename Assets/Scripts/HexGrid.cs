@@ -129,6 +129,10 @@ public class HexGrid : MonoBehaviour
         cell.Index = i;//cell.Color = defaultColor;
         cell.ShaderData = cellShaderData;
 
+        cell.Explorable =
+            x > 0 && z > 0 && x < cellCountX - 1 && z < cellCountZ - 1;
+
+
         if (x > 0)
         {
             cell.SetNeighbor(HexDirection.W, cells[i - 1]);
@@ -336,12 +340,12 @@ public class HexGrid : MonoBehaviour
             {
                 return true;
             }
-            
+
             int currentTurn = (current.Distance - 1) / speed;
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
             {
                 HexCell neighbor = current.GetNeighbor(d);
-                if (neighbor == null || 
+                if (neighbor == null ||
                     neighbor.SearchPhase > searchFrontierPhase)
                 {
                     continue;
@@ -388,7 +392,7 @@ public class HexGrid : MonoBehaviour
     List<HexCell> GetVisibleCells(HexCell fromCell, int range)
     {
         List<HexCell> visibleCells = ListPool<HexCell>.Get();
-        
+
         searchFrontierPhase += 2;
 
         if (searchFrontier == null)
@@ -416,11 +420,12 @@ public class HexGrid : MonoBehaviour
             {
                 HexCell neighbor = current.GetNeighbor(d);
                 if (neighbor == null ||
-                    neighbor.SearchPhase > searchFrontierPhase)
+                    neighbor.SearchPhase > searchFrontierPhase ||
+                    !neighbor.Explorable)
                 {
                     continue;
                 }
-                
+
                 int distance = current.Distance + 1;
                 if (distance + neighbor.ViewElevation > range ||
                     distance > fromCoordinates.DistanceTo(neighbor.coordinates))
@@ -462,7 +467,7 @@ public class HexGrid : MonoBehaviour
         unit.Die();
     }
 
-    void ShowPath (int speed)
+    void ShowPath(int speed)
     {
         if (currentPathExists)
         {
