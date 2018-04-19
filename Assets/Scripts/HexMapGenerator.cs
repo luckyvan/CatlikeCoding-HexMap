@@ -10,4 +10,5 @@ public class HexMapGenerator : MonoBehaviour {
     {
         grid.CreateMap(x, z);
     }
+
 }
