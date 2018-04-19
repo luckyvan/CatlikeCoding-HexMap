@@ -304,6 +304,16 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
+    public HexCell GetCell(int xOffset, int zOffset)
+    {
+        return cells[xOffset + zOffset * cellCountX];
+    }
+
+    public HexCell GetCell(int cellIndex)
+    {
+        return cells[cellIndex];
+    }
+
     void ClearUnits()
     {
         for (int i = 0; i < units.Count; i++)
