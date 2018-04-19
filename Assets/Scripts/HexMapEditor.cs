@@ -40,7 +40,8 @@ public class HexMapEditor : MonoBehaviour
     {
         //SelectColor(0);
         terrainMaterial.DisableKeyword("GRID_ON");
-        SetEditMode(false);
+        Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
+        SetEditMode(true);
     }
 
     void Update()
