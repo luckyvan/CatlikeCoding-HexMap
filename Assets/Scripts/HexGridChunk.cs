@@ -136,7 +136,7 @@ public class HexGridChunk : MonoBehaviour
         {
             TriangulateConnection(direction, cell, e);
         }
-        
+
         if (cell.IsUnderwater)
         {
             TriangulateWater(direction, cell, center);
@@ -173,26 +173,31 @@ public class HexGridChunk : MonoBehaviour
 
         if (direction <= HexDirection.SE)
         {
-            Vector3 bridge = HexMetrics.GetWaterBridge(direction);
-            Vector3 e1 = c1 + bridge;
-            Vector3 e2 = c2 + bridge;
-
-            water.AddQuad(c1, c2, e1, e2);
-            indices.y = neighbor.Index;
-            water.AddQuadCellData(indices, weights1, weights2);
-
-            if (direction <= HexDirection.E)
+            if (neighbor != null && neighbor.IsUnderwater)
             {
-                HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
-                if (nextNeighbor == null || !nextNeighbor.IsUnderwater)
+                Vector3 bridge = HexMetrics.GetWaterBridge(direction);
+                Vector3 e1 = c1 + bridge;
+                Vector3 e2 = c2 + bridge;
+
+                water.AddQuad(c1, c2, e1, e2);
+
+                indices.y = neighbor.Index;
+                water.AddQuadCellData(indices, weights1, weights2);
+
+
+                if (direction <= HexDirection.E)
                 {
-                    return;
+                    HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
+                    if (nextNeighbor == null || !nextNeighbor.IsUnderwater)
+                    {
+                        return;
+                    }
+                    water.AddTriangle(
+                        c2, e2, c2 + HexMetrics.GetWaterBridge(direction.Next())
+                    );
+                    indices.z = nextNeighbor.Index;
+                    water.AddTriangleCellData(indices, weights1, weights2, weights3);
                 }
-                water.AddTriangle(
-                    c2, e2, c2 + HexMetrics.GetWaterBridge(direction.Next())
-                );
-                indices.z = nextNeighbor.Index;
-                water.AddTriangleCellData(indices, weights1, weights2, weights3);
             }
         }
     }
@@ -509,7 +514,7 @@ public class HexGridChunk : MonoBehaviour
     }
 
     void TriangulateRoad(
-        Vector3 center, Vector3 mL, Vector3 mR, 
+        Vector3 center, Vector3 mL, Vector3 mR,
         EdgeVertices e, bool hasRoadThroughCellEdge, float index
     )
     {
