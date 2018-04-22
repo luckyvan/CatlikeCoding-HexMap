@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class HexMapGenerator : MonoBehaviour {
     [Range(20, 200)]
     public int chunkSizeMax = 100;
 
+    [Range(5, 95)]
+    public int landPercentage = 50;
+
     int cellCount;
 
     HexCellPriorityQueue searchFrontier;
@@ -30,10 +34,7 @@ public class HexMapGenerator : MonoBehaviour {
             searchFrontier = new HexCellPriorityQueue();
         }
 
-        for (int i = 0; i < 5; i++)
-        {
-            RaiseTerrain(Random.Range(chunkSizeMin, chunkSizeMax + 1));
-        }
+        CreateLand();
 
         for (int i = 0; i < cellCount; i++)
         {
@@ -41,7 +42,18 @@ public class HexMapGenerator : MonoBehaviour {
         }
     }
 
-    void RaiseTerrain(int chunkSize)
+    void CreateLand()
+    {
+        int landBudget = Mathf.RoundToInt(cellCount * landPercentage * 0.01f);
+        while (landBudget > 0)
+        {
+            landBudget = RaiseTerrain(
+                UnityEngine.Random.Range(chunkSizeMin, chunkSizeMax + 1), landBudget
+            );
+        }
+    }
+
+    int RaiseTerrain(int chunkSize, int budget)
     {
         searchFrontierPhase += 1;
         HexCell firstCell = GetRandomCell();
@@ -55,7 +67,15 @@ public class HexMapGenerator : MonoBehaviour {
         while (size < chunkSize && searchFrontier.Count > 0)
         {
             HexCell current = searchFrontier.Dequeue();
-            current.TerrainTypeIndex = 1;
+            if (current.TerrainTypeIndex == 0)
+            {
+                current.TerrainTypeIndex = 1;
+                if (--budget == 0)
+                {
+                    break;
+                }
+            }
+
             size += 1;
 
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
@@ -65,16 +85,18 @@ public class HexMapGenerator : MonoBehaviour {
                 {
                     neighbor.SearchPhase = searchFrontierPhase;
                     neighbor.Distance = neighbor.coordinates.DistanceTo(center);
-                    neighbor.SearchHeuristic = Random.value < jitterProbability ? 1 : 0; ;
+                    neighbor.SearchHeuristic = UnityEngine.Random.value < jitterProbability ? 1 : 0; ;
                     searchFrontier.Enqueue(neighbor);
                 }
             }
         }
         searchFrontier.Clear();
+
+        return budget;
     }
 
     HexCell GetRandomCell()
     {
-        return grid.GetCell(Random.Range(0, cellCount));
+        return grid.GetCell(UnityEngine.Random.Range(0, cellCount));
     }
 }
