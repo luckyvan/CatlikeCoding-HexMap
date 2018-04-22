@@ -22,6 +22,9 @@ public class HexMapGenerator : MonoBehaviour {
     [Range(1, 5)]
     public int waterLevel = 3;
 
+    [Range(0f, 1f)]
+    public float highRiseProbability = 0.25f;
+
     int cellCount;
 
     HexCellPriorityQueue searchFrontier;
@@ -71,12 +74,16 @@ public class HexMapGenerator : MonoBehaviour {
         searchFrontier.Enqueue(firstCell);
         HexCoordinates center = firstCell.coordinates;
 
+        int rise = UnityEngine.Random.value < highRiseProbability ? 2 : 1;
         int size = 0;
         while (size < chunkSize && searchFrontier.Count > 0)
         {
             HexCell current = searchFrontier.Dequeue();
-            current.Elevation += 1;
-            if (current.Elevation == waterLevel && --budget == 0)
+            int originalElevation = current.Elevation;
+            current.Elevation = originalElevation + rise;
+            if (
+                originalElevation < waterLevel &&
+                current.Elevation >= waterLevel && --budget == 0)
             {
                 break;
             }
