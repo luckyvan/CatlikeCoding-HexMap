@@ -6,13 +6,25 @@ public class HexMapGenerator : MonoBehaviour {
 
     public HexGrid grid;
 
+    int cellCount;
+
     public void GenerateMap(int x, int z)
     {
+        cellCount = x * z;
         grid.CreateMap(x, z);
-        for (int i = 0; i < z; i++)
+        RaiseTerrain(7);
+    }
+
+    void RaiseTerrain(int chunkSize)
+    {
+        for (int i = 0; i < chunkSize; i++)
         {
-            grid.GetCell(x / 2, i).TerrainTypeIndex = 1;
+            GetRandomCell().TerrainTypeIndex = 1;
         }
     }
 
+    HexCell GetRandomCell()
+    {
+        return grid.GetCell(Random.Range(0, cellCount));
+    }
 }
