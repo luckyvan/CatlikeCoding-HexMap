@@ -20,7 +20,7 @@ public class HexMapGenerator : MonoBehaviour {
         {
             searchFrontier = new HexCellPriorityQueue();
         }
-        RaiseTerrain(7);
+        RaiseTerrain(30);
         for (int i = 0; i < cellCount; i++)
         {
             grid.GetCell(i).SearchPhase = 0;
@@ -35,6 +35,7 @@ public class HexMapGenerator : MonoBehaviour {
         firstCell.Distance = 0;
         firstCell.SearchHeuristic = 0;
         searchFrontier.Enqueue(firstCell);
+        HexCoordinates center = firstCell.coordinates;
 
         int size = 0;
         while (size < chunkSize && searchFrontier.Count > 0)
@@ -49,7 +50,7 @@ public class HexMapGenerator : MonoBehaviour {
                 if (neighbor && neighbor.SearchPhase < searchFrontierPhase)
                 {
                     neighbor.SearchPhase = searchFrontierPhase;
-                    neighbor.Distance = 0;
+                    neighbor.Distance = neighbor.coordinates.DistanceTo(center);
                     neighbor.SearchHeuristic = 0;
                     searchFrontier.Enqueue(neighbor);
                 }
