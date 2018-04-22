@@ -9,6 +9,12 @@ public class HexMapGenerator : MonoBehaviour {
     [Range(0f, 0.5f)]
     public float jitterProbability = 0.25f;
 
+    [Range(20, 200)]
+    public int chunkSizeMin = 30;
+
+    [Range(20, 200)]
+    public int chunkSizeMax = 100;
+
     int cellCount;
 
     HexCellPriorityQueue searchFrontier;
@@ -23,7 +29,12 @@ public class HexMapGenerator : MonoBehaviour {
         {
             searchFrontier = new HexCellPriorityQueue();
         }
-        RaiseTerrain(30);
+
+        for (int i = 0; i < 5; i++)
+        {
+            RaiseTerrain(Random.Range(chunkSizeMin, chunkSizeMax + 1));
+        }
+
         for (int i = 0; i < cellCount; i++)
         {
             grid.GetCell(i).SearchPhase = 0;
