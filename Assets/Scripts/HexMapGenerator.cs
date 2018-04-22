@@ -36,6 +36,8 @@ public class HexMapGenerator : MonoBehaviour {
 
     public int seed;
 
+    public bool useFixedSeed;
+
     int cellCount;
 
     HexCellPriorityQueue searchFrontier;
@@ -45,10 +47,13 @@ public class HexMapGenerator : MonoBehaviour {
     public void GenerateMap(int x, int z)
     {
         UnityEngine.Random.State originalRandomState = UnityEngine.Random.state;
-        seed = UnityEngine.Random.Range(0, int.MaxValue);
-        seed ^= (int)System.DateTime.Now.Ticks;
-        seed ^= (int)Time.unscaledTime;
-        seed &= int.MaxValue;
+        if (!useFixedSeed)
+        {
+            seed = UnityEngine.Random.Range(0, int.MaxValue);
+            seed ^= (int)System.DateTime.Now.Ticks;
+            seed ^= (int)Time.unscaledTime;
+            seed &= int.MaxValue;
+        }
         UnityEngine.Random.InitState(seed);
 
         cellCount = x * z;

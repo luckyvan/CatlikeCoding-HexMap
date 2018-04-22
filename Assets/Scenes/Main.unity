@@ -5783,6 +5783,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1185849611}
+  jitterProbability: 0.25
+  chunkSizeMin: 30
+  chunkSizeMax: 100
+  landPercentage: 50
+  waterLevel: 3
+  highRiseProbability: 0.25
+  sinkProbability: 0.2
+  elevationMinimum: -2
+  elevationMaximum: 8
+  seed: 0
+  useFixedSeed: 0
 --- !u!4 &751572200
 Transform:
   m_ObjectHideFlags: 0
@@ -11498,7 +11509,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1546158720
 GameObject:
   m_ObjectHideFlags: 0
