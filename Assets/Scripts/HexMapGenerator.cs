@@ -35,6 +35,7 @@ public class HexMapGenerator : MonoBehaviour {
         }
 
         CreateLand();
+        SetTerrainType();
 
         for (int i = 0; i < cellCount; i++)
         {
@@ -67,15 +68,12 @@ public class HexMapGenerator : MonoBehaviour {
         while (size < chunkSize && searchFrontier.Count > 0)
         {
             HexCell current = searchFrontier.Dequeue();
-            if (current.TerrainTypeIndex == 0)
+            current.Elevation += 1;
+            if (current.Elevation == 1 && --budget == 0)
             {
-                current.TerrainTypeIndex = 1;
-                if (--budget == 0)
-                {
-                    break;
-                }
+                break;
             }
-
+            
             size += 1;
 
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
@@ -98,5 +96,14 @@ public class HexMapGenerator : MonoBehaviour {
     HexCell GetRandomCell()
     {
         return grid.GetCell(UnityEngine.Random.Range(0, cellCount));
+    }
+
+    void SetTerrainType()
+    {
+        for (int i = 0; i < cellCount; i++)
+        {
+            HexCell cell = grid.GetCell(i);
+            cell.TerrainTypeIndex = cell.Elevation;
+        }
     }
 }
