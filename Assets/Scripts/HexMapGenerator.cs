@@ -34,6 +34,8 @@ public class HexMapGenerator : MonoBehaviour {
     [Range(6, 10)]
     public int elevationMaximum = 8;
 
+    public int seed;
+
     int cellCount;
 
     HexCellPriorityQueue searchFrontier;
@@ -42,6 +44,13 @@ public class HexMapGenerator : MonoBehaviour {
 
     public void GenerateMap(int x, int z)
     {
+        UnityEngine.Random.State originalRandomState = UnityEngine.Random.state;
+        seed = UnityEngine.Random.Range(0, int.MaxValue);
+        seed ^= (int)System.DateTime.Now.Ticks;
+        seed ^= (int)Time.unscaledTime;
+        seed &= int.MaxValue;
+        UnityEngine.Random.InitState(seed);
+
         cellCount = x * z;
         grid.CreateMap(x, z);
         if (searchFrontier == null)
@@ -60,6 +69,7 @@ public class HexMapGenerator : MonoBehaviour {
         {
             grid.GetCell(i).SearchPhase = 0;
         }
+        UnityEngine.Random.state = originalRandomState;
     }
 
     void CreateLand()
