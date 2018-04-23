@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HexMapGenerator : MonoBehaviour {
 
@@ -50,17 +51,19 @@ public class HexMapGenerator : MonoBehaviour {
 
     int searchFrontierPhase;
 
+    int xMin, xMax, zMin, zMax;
+
     public void GenerateMap(int x, int z)
     {
-        UnityEngine.Random.State originalRandomState = UnityEngine.Random.state;
+        Random.State originalRandomState = Random.state;
         if (!useFixedSeed)
         {
-            seed = UnityEngine.Random.Range(0, int.MaxValue);
+            seed = Random.Range(0, int.MaxValue);
             seed ^= (int)System.DateTime.Now.Ticks;
             seed ^= (int)Time.unscaledTime;
             seed &= int.MaxValue;
         }
-        UnityEngine.Random.InitState(seed);
+        Random.InitState(seed);
 
         cellCount = x * z;
         grid.CreateMap(x, z);
@@ -73,6 +76,11 @@ public class HexMapGenerator : MonoBehaviour {
         {
             grid.GetCell(i).WaterLevel = waterLevel;
         }
+
+        xMin = mapBorderX;
+        xMax = x - mapBorderX;
+        zMin = mapBorderZ;
+        zMax = z - mapBorderZ;
         CreateLand();
         SetTerrainType();
 
@@ -80,7 +88,7 @@ public class HexMapGenerator : MonoBehaviour {
         {
             grid.GetCell(i).SearchPhase = 0;
         }
-        UnityEngine.Random.state = originalRandomState;
+        Random.state = originalRandomState;
     }
 
     void CreateLand()
@@ -88,8 +96,8 @@ public class HexMapGenerator : MonoBehaviour {
         int landBudget = Mathf.RoundToInt(cellCount * landPercentage * 0.01f);
         while (landBudget > 0)
         {
-            int chunkSize = UnityEngine.Random.Range(chunkSizeMin, chunkSizeMax - 1);
-            if (UnityEngine.Random.value < sinkProbability)
+            int chunkSize = Random.Range(chunkSizeMin, chunkSizeMax - 1);
+            if (Random.value < sinkProbability)
             {
                 landBudget = SinkTerrain(chunkSize, landBudget);
             }
@@ -110,7 +118,7 @@ public class HexMapGenerator : MonoBehaviour {
         searchFrontier.Enqueue(firstCell);
         HexCoordinates center = firstCell.coordinates;
 
-        int rise = UnityEngine.Random.value < highRiseProbability ? 2 : 1;
+        int rise = Random.value < highRiseProbability ? 2 : 1;
         int size = 0;
         while (size < chunkSize && searchFrontier.Count > 0)
         {
@@ -138,7 +146,7 @@ public class HexMapGenerator : MonoBehaviour {
                 {
                     neighbor.SearchPhase = searchFrontierPhase;
                     neighbor.Distance = neighbor.coordinates.DistanceTo(center);
-                    neighbor.SearchHeuristic = UnityEngine.Random.value < jitterProbability ? 1 : 0; ;
+                    neighbor.SearchHeuristic = Random.value < jitterProbability ? 1 : 0; ;
                     searchFrontier.Enqueue(neighbor);
                 }
             }
@@ -158,7 +166,7 @@ public class HexMapGenerator : MonoBehaviour {
         searchFrontier.Enqueue(firstCell);
         HexCoordinates center = firstCell.coordinates;
 
-        int sink = UnityEngine.Random.value < highRiseProbability ? 2 : 1;
+        int sink = Random.value < highRiseProbability ? 2 : 1;
         int size = 0;
         while (size < chunkSize && searchFrontier.Count > 0)
         {
@@ -186,7 +194,7 @@ public class HexMapGenerator : MonoBehaviour {
                 {
                     neighbor.SearchPhase = searchFrontierPhase;
                     neighbor.Distance = neighbor.coordinates.DistanceTo(center);
-                    neighbor.SearchHeuristic = UnityEngine.Random.value < jitterProbability ? 1 : 0; ;
+                    neighbor.SearchHeuristic = Random.value < jitterProbability ? 1 : 0; ;
                     searchFrontier.Enqueue(neighbor);
                 }
             }
@@ -198,7 +206,7 @@ public class HexMapGenerator : MonoBehaviour {
 
     HexCell GetRandomCell()
     {
-        return grid.GetCell(UnityEngine.Random.Range(0, cellCount));
+        return grid.GetCell(Random.Range(xMin, xMax), Random.Range(zMin, zMax));
     }
 
     void SetTerrainType()
