@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class HexMapGenerator : MonoBehaviour {
+public class HexMapGenerator : MonoBehaviour
+{
 
     public HexGrid grid;
 
@@ -94,7 +95,7 @@ public class HexMapGenerator : MonoBehaviour {
     void CreateLand()
     {
         int landBudget = Mathf.RoundToInt(cellCount * landPercentage * 0.01f);
-        while (landBudget > 0)
+        for (int guard = 0; landBudget > 0 && guard < 10000; guard++)
         {
             int chunkSize = Random.Range(chunkSizeMin, chunkSizeMax - 1);
             if (Random.value < sinkProbability)
@@ -105,6 +106,10 @@ public class HexMapGenerator : MonoBehaviour {
             {
                 landBudget = RaiseTerrain(chunkSize, landBudget);
             }
+        }
+        if (landBudget > 0)
+        {
+            Debug.LogWarning("Failed to use up " + landBudget + " land budget.");
         }
     }
 
@@ -136,7 +141,7 @@ public class HexMapGenerator : MonoBehaviour {
             {
                 break;
             }
-            
+
             size += 1;
 
             for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
