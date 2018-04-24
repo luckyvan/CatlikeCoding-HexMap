@@ -42,6 +42,9 @@ public class HexMapGenerator : MonoBehaviour
     [Range(0, 10)]
     public int mapBorderZ = 5;
 
+    [Range(0, 10)]
+    public int regionBorder = 5;
+
     public int seed;
 
     public bool useFixedSeed;
@@ -250,9 +253,12 @@ public class HexMapGenerator : MonoBehaviour
 
         MapRegion region;
         region.xMin = mapBorderX;
-        region.xMax = grid.cellCountX - mapBorderX;
+        region.xMax = grid.cellCountX / 2 - regionBorder;
         region.zMin = mapBorderZ;
         region.zMax = grid.cellCountZ - mapBorderZ;
+        regions.Add(region);
+        region.xMin = grid.cellCountX / 2 + regionBorder;
+        region.xMax = grid.cellCountX - mapBorderX;
         regions.Add(region);
     }
 
