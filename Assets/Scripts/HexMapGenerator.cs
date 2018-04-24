@@ -52,7 +52,12 @@ public class HexMapGenerator : MonoBehaviour
 
     int searchFrontierPhase;
 
-    int xMin, xMax, zMin, zMax;
+    struct MapRegion
+    {
+        public int xMin, xMax, zMin, zMax;
+    }
+
+    MapRegion region;
 
     public void GenerateMap(int x, int z)
     {
@@ -78,10 +83,10 @@ public class HexMapGenerator : MonoBehaviour
             grid.GetCell(i).WaterLevel = waterLevel;
         }
 
-        xMin = mapBorderX;
-        xMax = x - mapBorderX;
-        zMin = mapBorderZ;
-        zMax = z - mapBorderZ;
+        region.xMin = mapBorderX;
+        region.xMax = x - mapBorderX;
+        region.zMin = mapBorderZ;
+        region.zMax = z - mapBorderZ;
         CreateLand();
         SetTerrainType();
 
@@ -211,7 +216,7 @@ public class HexMapGenerator : MonoBehaviour
 
     HexCell GetRandomCell()
     {
-        return grid.GetCell(Random.Range(xMin, xMax), Random.Range(zMin, zMax));
+        return grid.GetCell(Random.Range(region.xMin, region.xMax), Random.Range(region.zMin, region.zMax));
     }
 
     void SetTerrainType()
